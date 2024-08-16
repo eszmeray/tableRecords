@@ -1,0 +1,488 @@
+.App {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('./assets/pagebg.jpg');
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+}
+
+.table-responsive {
+  table-layout: auto;
+  border-collapse: collapse;
+  box-shadow: 0px 10px 10px #ccc;
+  border-radius: 20px;
+  background-color: white;
+  white-space: nowrap;
+  margin: auto;
+  width: 85%;
+  padding-bottom: auto;
+  text-align: center;
+  height: 60%;
+  overflow-y: hidden;
+  
+}
+
+.table thead th {
+  background-color: #E9F3E2; 
+  color: #282828; 
+  font-weight: bold; 
+  height: 80px;
+  align-content: center;
+  
+}
+
+.table-no-border th,
+.table-no-border td {
+  border: none !important; 
+  
+  
+}
+
+
+.table-no-border {
+  border-collapse: collapse;
+  
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #26412c;
+}
+
+.row-btn{
+  padding-top: 6%;
+  padding-bottom: 2%;
+
+}
+
+.titleList {
+  text-align: left;
+  white-space: nowrap;
+  margin-right: 50px;
+}
+
+.totalRec {
+  color: rgb(119, 118, 118);
+  font-weight: 400;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 500px; 
+  margin: 0 auto; 
+  margin-left: 50px;
+}
+
+.custom-search {
+  border-radius: 10px;
+  border: 1px solid #ccc; 
+  height: 60px;
+  padding: 0 15px; 
+  flex: 1; 
+  font-size: 16px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-button {
+  background-color: #024533; 
+  border: 0px solid #ccc; 
+  border-radius: 10px; 
+  height: 60px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 15px;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.search-icon {
+  color: #ffffff;
+}
+
+.search-button:hover {
+  background-color: #E9F3E2; 
+}
+
+.search-button:hover .search-icon {
+  color: #024533; 
+}
+
+
+.search-button:active {
+  background-color: #024533; 
+}
+
+.search-button:active .search-icon {
+  color: #ffffff; 
+}
+
+
+.btn-group {
+  flex: 1;
+  display: flex;
+  justify-content: left;
+  gap: 10px;
+  margin-left: 1%;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.btn-filter {
+  background-color: #E9F3E2;
+  color: #024533;
+}
+
+.btn-primary {
+  background-color: #024533;
+}
+
+.btn-group .btn:nth-child(1) {
+  background-color: #E9F3E2;
+  font-weight: 600;
+  border-style: none;
+  width: 100%;
+  height: 60px;
+  color: #024533;
+}
+
+.btn-group .btn:nth-child(2) {
+  background-color: #024533;
+  font-weight: 600;
+  border-style: none;
+}
+
+.btn-group .btn:nth-child(3) {
+  background-color: #024533;
+  font-weight: 600;
+  border-style: none;
+}
+
+.btn-group .btn-filter:hover {
+  background-color: #024533;
+  color: white;
+}
+
+.btn-group .btn-primary:hover {
+  background-color: #E9F3E2;
+  color: #024533;
+}
+
+.btn-group .btn:nth-child(1):active {
+  background-color: #E9F3E2; 
+}
+
+.btn-group .btn:nth-child(2):active,
+.btn-group .btn:nth-child(3):active {
+  background-color: #024533; 
+}
+
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #666666;
+  color: white;
+}
+
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: #26412c;
+}
+
+.action-icon {
+  background: none;
+  border: none;
+  color: #26412c;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.action-icon:hover {
+  color: #E9F3E2; 
+}
+
+.action-icon:focus {
+  outline: none;
+}
+
+
+.pagination-container {
+  margin-top: 1%;
+  margin-right: 7%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
+
+.pagination-container .MuiTablePagination-root {
+  font-size: 0.5rem;
+  overflow-x: hidden;
+}
+
+.pagination-container .MuiTablePagination-select,
+.pagination-container .MuiTablePagination-displayedRows {
+  font-size: 1rem;
+}
+
+.pagination-container .MuiTablePagination-actions .MuiIconButton-root {
+  font-size: 1rem; 
+  color: #024533;
+}
+
+.pagination-container .MuiTablePagination-actions .MuiIconButton-root svg {
+  font-size: 2rem;
+  margin-right: 5px;
+}
+
+.modal-title {
+  color: #5F8D4E;
+  text-decoration: none; 
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px; 
+}
+
+.modal-subtitle {
+  color: #5F8D4E;
+
+}
+
+.modal-title::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px; 
+  background-color: #5F8D4E;
+  border-radius: 5px;
+  transform: translateY(2px); 
+}
+
+
+.modal-header {
+  border-bottom: 1px solid transparent !important;
+}
+
+.modal-footer {
+  border-top: 1px solid transparent !important;
+}
+
+
+.form-group label {
+  color: #024533; 
+  font-weight: bold; 
+}
+
+.form-control {
+  border-radius: 0.25rem; 
+  
+}
+
+.form-control::placeholder {
+  color: #024533 !important; 
+  opacity: 0.9 !important;
+  font-weight: 450;
+
+}
+
+.form-group {
+  margin-bottom: 1rem; 
+}
+
+.modal-footer .btn-primary{
+  background-color: #024533;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.modal-footer .btn-primary:hover{
+  background-color: #E9F3E2;
+  border-color: #024533;
+  color: #024533;
+  
+}
+
+
+.modal-footer .btn-secondary{
+  background-color: #E9F3E2;
+  border-color: #024533;
+  color: #024533;
+  font-weight: 600;
+
+
+}
+
+.modal-footer .btn-secondary:hover{
+  background-color: #024533;
+  color: white;
+}
+
+.modal-footer .btn-primary:active {
+  background-color: #024533 !important;
+  border-color: transparent;
+  font-weight: 600;
+  border-color: #024533 !important;
+}
+
+.modal-footer .btn-secondary:active {
+  background-color: #E9F3E2 !important;
+  border-color: transparent;
+  font-weight: 600;
+  color: #024533 !important;
+}
+
+/* styles/tblUserRecords.css */
+
+.table-container {
+  position: relative;
+}
+
+.modal-background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:rgba(32, 32, 32, 0.5); /* Optional: for a semi-transparent overlay */
+  filter: blur(1px); /* Adjust the blur intensity as needed */
+  z-index: 1000; /* Ensure it's behind the modal */
+  pointer-events: none; /* Allow clicks through the blur layer */
+}
+
+.modal-open .table-container {
+  overflow: hidden; /* Prevent scrolling of the background content */
+}
+
+
+.modal-background-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:  rgba(32, 32, 32, 0.5); /* Optional: semi-transparent overlay */
+  filter: blur(300%); /* Adjust the blur intensity */
+  z-index: 10; /* Ensure it's behind the modal */
+  pointer-events: none; /* Allow clicks through the blur layer */
+}
+
+.modal-open .container {
+  overflow: hidden; /* Prevent scrolling of the background content */
+}
+
+
+
+@media (max-width: 1000px) {
+
+  .App{
+    overflow-x: auto;
+  }
+
+
+  .table-responsive{
+    table-layout: auto;
+    width: 320px;
+      
+  
+  }
+
+  .table-no-border th,
+  .table-no-border td {
+    font-size: 10px;
+  }
+
+  .action-icon {
+    font-size: 10px;
+  }
+
+  .titleList {
+    font-size: 15px;
+  }
+
+  .totalRec {
+    font-size: 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+
+  }
+
+  .btn-group .btn {
+    margin: 5px 0;
+    font-size: 10px;
+  }
+
+  .search {
+    flex-direction: column;
+
+  }
+
+  .custom-search {
+    height: 50px;
+    font-size: 5px;
+
+  }
+
+
+  .search-button {
+    width: 100%;
+    margin-top: 15px;
+    height: 20px; 
+    font-size: 10px; 
+    margin-right: 3%;
+  }
+
+  .search-icon {
+    font-size: 10px; 
+    
+  }
+
+  .pagination-container {
+    width: 350px;
+    padding-right: 0;
+    justify-content: center;
+  }
+
+  .pagination-container .MuiTablePagination-actions .MuiIconButton-root {
+    font-size: 0.5rem; 
+  }
+
+  .pagination-container .MuiTablePagination-actions .MuiIconButton-root svg {
+    font-size: 0.5rem; 
+  }
+
+  .pagination-container .MuiTablePagination-select,
+  .pagination-container .MuiTablePagination-displayedRows {
+    font-size: 0.5rem; 
+}
+}
