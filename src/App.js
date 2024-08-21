@@ -1,6 +1,6 @@
 import './App.css';
-import {Table} from "./components/tblUserRecords";
-import {Buttons} from "./components/Buttons";
+import {Table} from "./tables/tblUserRecords/tblUserRecords";
+import {Buttons} from "./tables/tblUserRecords/Buttons";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {

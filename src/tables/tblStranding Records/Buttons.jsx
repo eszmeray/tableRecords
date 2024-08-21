@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './styles/tblUserRecords.css';
 import { IoIosFunnel, IoIosAdd, IoIosPrint } from "react-icons/io";
 import { FaSearch } from 'react-icons/fa';
@@ -8,6 +8,21 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 export const Buttons = () => {
   const [filterCriteria, setFilterCriteria] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    role: '',
+    password: '',
+    email: '',
+  });
+  const [formErrors, setFormErrors] = useState({
+    firstName: '',
+    lastName: '',
+    role: '',
+    password: '',
+    email: '',
+  });
+  const [successMessage, setSuccessMessage] = useState('');
   const modalRef = useRef(null);
 
   const handleFilterChange = (criteria) => {
@@ -23,13 +38,30 @@ export const Buttons = () => {
     // Handle search button click
   };
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  };
+  const toggleModal = useCallback(() => {
+    if (showModal) {
+      // Clear form data and errors when closing the modal
+      setFormData({
+        firstName: '',
+        lastName: '',
+        role: '',
+        password: '',
+        email: '',
+      });
+      setFormErrors({
+        firstName: '',
+        lastName: '',
+        role: '',
+        password: '',
+        email: '',
+      });
+    }
+    setShowModal(prevShowModal => !prevShowModal);
+  }, [showModal]);
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setShowModal(false);
+      toggleModal();
     }
   };
 
@@ -47,6 +79,39 @@ export const Buttons = () => {
       document.body.classList.remove('modal-open');
     };
   }, [showModal]);
+
+  const handleInputChange = (event) => {
+    const { id, value } = event.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [id]: value,
+    }));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.firstName) errors.firstName = 'First name is required';
+    if (!formData.lastName) errors.lastName = 'Last name is required';
+    if (!formData.role) errors.role = 'Role is required';
+    if (!formData.password) errors.password = 'Password is required';
+    if (!formData.email) errors.email = 'Email is required';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = 'Email is invalid';
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleAddClick = () => {
+    if (validateForm()) {
+      // Handle form submission
+      console.log('Form Data:', formData);
+      setSuccessMessage('Data has been added successfully.');
+      toggleModal(); // Close modal after successful submission
+      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
+    }
+  };
 
   return (
     <div className="container my-12">
@@ -79,9 +144,15 @@ export const Buttons = () => {
             </div>
           </div>
           <button className="btn btn-primary" onClick={toggleModal}><IoIosAdd /> NEW RECORD</button>
-          <button className="btn btn-primary"><IoIosPrint />Print Records</button>
+          <button className="btn btn-primary print"><IoIosPrint /> Print Records</button>
         </div>
       </div>
+
+      {successMessage && (
+        <div className="success-message">
+          {successMessage}
+        </div>
+      )}
 
       {showModal && (
         <>
@@ -97,34 +168,70 @@ export const Buttons = () => {
                   <form>
                     <div className="form-group">
                       <label htmlFor="firstName">First Name</label>
-                      <input type="text" className="form-control" id="firstName" placeholder="Enter first name" />
+                      <input
+                        type="text"
+                        className={`form-control ${formErrors.firstName ? 'is-invalid' : ''}`}
+                        id="firstName"
+                        placeholder="Enter first name"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.firstName && <div className="invalid-feedback">{formErrors.firstName}</div>}
                     </div>
                     <div className="form-group">
                       <label htmlFor="lastName">Last Name</label>
-                      <input type="text" className="form-control" id="lastName" placeholder="Enter last name" />
+                      <input
+                        type="text"
+                        className={`form-control ${formErrors.lastName ? 'is-invalid' : ''}`}
+                        id="lastName"
+                        placeholder="Enter last name"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.lastName && <div className="invalid-feedback">{formErrors.lastName}</div>}
                     </div>
                     <div className="form-group">
                       <label htmlFor="role">Role</label>
-                      <select className="form-control" id="role">
+                      <select
+                        className={`form-control ${formErrors.role ? 'is-invalid' : ''}`}
+                        id="role"
+                        value={formData.role}
+                        onChange={handleInputChange}
+                      >
                         <option value="">Select role</option>
                         <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                        <option value="manager">Manager</option>
-                        <option value="editor">Editor</option>
+                        <option value="user">Bantay Dagat</option>
                       </select>
+                      {formErrors.role && <div className="invalid-feedback">{formErrors.role}</div>}
                     </div>
                     <div className="form-group">
                       <label htmlFor="password">Password</label>
-                      <input type="password" className="form-control" id="password" placeholder="Enter password" />
+                      <input
+                        type="password"
+                        className={`form-control ${formErrors.password ? 'is-invalid' : ''}`}
+                        id="password"
+                        placeholder="Enter password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
                     </div>
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
-                      <input type="email" className="form-control" id="email" placeholder="Enter email" />
+                      <input
+                        type="email"
+                        className={`form-control ${formErrors.email ? 'is-invalid' : ''}`}
+                        id="email"
+                        placeholder="Enter email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
                     </div>
                   </form>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-primary">ADD</button>
+                  <button type="button" className="btn btn-primary" onClick={handleAddClick}>ADD</button>
                   <button type="button" className="btn btn-secondary" onClick={toggleModal}>CANCEL</button>
                 </div>
               </div>
