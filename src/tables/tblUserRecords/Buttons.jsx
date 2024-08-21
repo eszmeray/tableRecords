@@ -231,8 +231,8 @@ export const Buttons = () => {
                   </form>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-primary" onClick={handleAddClick}>ADD</button>
                   <button type="button" className="btn btn-secondary" onClick={toggleModal}>CANCEL</button>
+                  <button type="button" className="btn btn-primary" onClick={handleAddClick}>ADD</button>
                 </div>
               </div>
             </div>

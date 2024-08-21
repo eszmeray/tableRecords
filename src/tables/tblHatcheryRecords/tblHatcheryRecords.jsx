@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 const formatDate = (date) => {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const month = String(date.getMonth() + 1).padStart(2, '0'); 
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
@@ -86,9 +86,9 @@ export const Table = () => {
     setSelectedEggIndex(originalIndex);
     const newFormData = {
       ...egg,
-      date: formatDate(new Date(egg.date)) // Ensure date format is correct
+      date: formatDate(new Date(egg.date)) 
     };
-    console.log('Setting form data:', newFormData); // Add this line
+    console.log('Setting form data:', newFormData); 
     setFormData(newFormData);
     setShowEditModal(!showEditModal);
   };
@@ -127,7 +127,7 @@ export const Table = () => {
     const { id, value } = event.target;
     setFormData(prevFormData => ({
       ...prevFormData,
-      [id]: id === 'date' ? value : value, // Handle date separately if needed
+      [id]: id === 'date' ? value : value, 
     }));
   };
   
@@ -138,10 +138,18 @@ export const Table = () => {
     if (!formData.barangay) errors.barangay = 'Barangay is required';
     if (!formData.date) errors.date = 'Date is required';
     if (!formData.nestCode) errors.nestCode = 'Nest Code is required';
-    if (formData.noOfEggs < 0) errors.noOfEggs = 'Number of Eggs cannot be negative';
-    if (formData.noOfHatchlingsEmerged < 0) errors.noOfHatchlingsEmerged = 'Number of Hatchlings Emerged cannot be negative';
-    if (formData.noOfHatchlingsReleased < 0) errors.noOfHatchlingsReleased = 'Number of Hatchlings Released cannot be negative';
-
+    if (formData.noOfEggs === '' || formData.noOfEggs < 0) {
+      errors.noOfEggs = 'Number of Eggs is required and must be 0 or greater';
+  }
+  
+  if (formData.noOfHatchlingsEmerged === '' || formData.noOfHatchlingsEmerged < 0) {
+      errors.noOfHatchlingsEmerged = 'Number of Hatchlings Emerged is required and must be 0 or greater';
+  }
+  
+  if (formData.noOfHatchlingsReleased === '' || formData.noOfHatchlingsReleased < 0) {
+      errors.noOfHatchlingsReleased = 'Number of Hatchlings Released is required and must be 0 or greater';
+  }
+  
     setFormErrors(errors);
 
     return Object.keys(errors).length === 0;
@@ -154,7 +162,7 @@ export const Table = () => {
       setEggs(updatedEggs);
       setSuccessMessage('Data has been updated successfully.');
       setShowEditModal(false);
-      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
+      setTimeout(() => setSuccessMessage(''), 3000); 
     }
   };
 
@@ -393,6 +401,7 @@ export const Table = () => {
                       className="form-control"
                       value={formData.noOfEggs}
                       onChange={handleInputChange}
+                      min="0" 
                     />
                     {formErrors.noOfEggs && (
                       <small className="text-danger">{formErrors.noOfEggs}</small>
@@ -407,6 +416,7 @@ export const Table = () => {
                       className="form-control"
                       value={formData.noOfHatchlingsEmerged}
                       onChange={handleInputChange}
+                      min="0" 
                     />
                     {formErrors.noOfHatchlingsEmerged && (
                       <small className="text-danger">{formErrors.noOfHatchlingsEmerged}</small>
@@ -421,6 +431,7 @@ export const Table = () => {
                       className="form-control"
                       value={formData.noOfHatchlingsReleased}
                       onChange={handleInputChange}
+                      min="0" 
                     />
                     {formErrors.noOfHatchlingsReleased && (
                       <small className="text-danger">{formErrors.noOfHatchlingsReleased}</small>
@@ -441,8 +452,8 @@ export const Table = () => {
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowEditModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={handleSaveClick}>Save changes</button>
+              <button type="button" className="btn btn-secondary" onClick={() => setShowEditModal(false)}>CLOSE</button>
+              <button type="button" className="btn btn-primary" onClick={handleSaveClick}>SAVE</button>
               </div>
             </div>
           </div>
@@ -470,7 +481,7 @@ export const Table = () => {
 
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowViewModal(false)}>Close</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowViewModal(false)}>CLOSE</button>
               </div>
             </div>
           </div>

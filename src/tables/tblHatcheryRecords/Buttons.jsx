@@ -41,16 +41,13 @@ export const Buttons = () => {
 
   const handleSearchChange = (event) => {
     const searchValue = event.target.value;
-    // Handle search value change
   };
 
   const handleSearchClick = () => {
-    // Handle search button click
   };
 
   const toggleModal = useCallback(() => {
     if (showModal) {
-      // Clear form data and errors when closing the modal
       setFormData({
         island: '',
         barangay: '',
@@ -115,10 +112,18 @@ export const Buttons = () => {
     if (!formData.barangay) errors.barangay = 'Barangay is required';
     if (!formData.date) errors.date = 'Date is required';
     if (!formData.nestCode) errors.nestCode = 'Nest code is required';
-    if (!formData.noOfEggs) errors.noOfEggs = 'Number of eggs is required';
-    if (!formData.noOfHatchlingsEmerged) errors.noOfHatchlingsEmerged = 'Number of hatchlings emerged is required';
-    if (!formData.noOfHatchlingsReleased) errors.noOfHatchlingsReleased = 'Number of hatchlings released is required';
-
+    if (formData.noOfEggs === '' || formData.noOfEggs < 0) {
+      errors.noOfEggs = 'Number of Eggs is required and must be 0 or greater';
+  }
+  
+  if (formData.noOfHatchlingsEmerged === '' || formData.noOfHatchlingsEmerged < 0) {
+      errors.noOfHatchlingsEmerged = 'Number of Hatchlings Emerged is required and must be 0 or greater';
+  }
+  
+  if (formData.noOfHatchlingsReleased === '' || formData.noOfHatchlingsReleased < 0) {
+      errors.noOfHatchlingsReleased = 'Number of Hatchlings Released is required and must be 0 or greater';
+  }
+  
     setFormErrors(errors);
 
     return Object.keys(errors).length === 0;
@@ -126,11 +131,10 @@ export const Buttons = () => {
 
   const handleAddClick = () => {
     if (validateForm()) {
-      // Handle form submission
       console.log('Form Data:', formData);
       setSuccessMessage('Data has been added successfully.');
-      toggleModal(); // Close modal after successful submission
-      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
+      toggleModal(); 
+      setTimeout(() => setSuccessMessage(''), 3000); 
     }
   };
 
@@ -343,8 +347,8 @@ export const Buttons = () => {
                   </form>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={toggleModal}>Close</button>
-                  <button type="button" className="btn btn-primary" onClick={handleAddClick}>Save changes</button>
+                <button type="button" className="btn btn-secondary" onClick={toggleModal}>CANCEL</button>
+                  <button type="button" className="btn btn-primary" onClick={handleAddClick}>ADD</button>
                 </div>
               </div>
             </div>

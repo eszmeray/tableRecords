@@ -319,8 +319,8 @@ export const Table = () => {
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowEditModal(false)}>Close</button>
-                <button type="button" className="btn btn-primary" onClick={handleSaveClick}>Save changes</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowEditModal(false)}>CLOSE</button>
+                <button type="button" className="btn btn-primary" onClick={handleSaveClick}>SAVE</button>
               </div>
             </div>
           </div>
@@ -343,7 +343,7 @@ export const Table = () => {
                 <p><strong>Email:</strong> {users[selectedUserIndex].email}</p>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" onClick={() => setShowViewModal(false)}>Close</button>
+                <button type="button" className="btn btn-secondary" onClick={() => setShowViewModal(false)}>CLOSE</button>
               </div>
             </div>
           </div>
