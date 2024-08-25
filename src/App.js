@@ -1,5 +1,24 @@
-//tblHatcheryRecords
+//tblSurrenderRecords
+
 import './App.css';
+import {Table} from "./tables/tblSurrenderRecords/tblSurrenderRecords";
+import {Buttons} from "./tables/tblSurrenderRecords/Buttons";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function App() {
+  return (
+    <div className="App">
+      <Buttons/>
+      <Table />
+    </div>
+  );
+}
+
+export default App;
+
+//tblHatcheryRecords
+
+/*import './App.css';
 import {Table} from "./tables/tblHatcheryRecords/tblHatcheryRecords";
 import {Buttons} from "./tables/tblHatcheryRecords/Buttons";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +33,7 @@ function App() {
 }
 
 
-export default App;
+export default App;*/
 
 
 //tblUserRecords

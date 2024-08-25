@@ -31,16 +31,13 @@ export const Buttons = () => {
 
   const handleSearchChange = (event) => {
     const searchValue = event.target.value;
-    // Handle search value change
   };
 
   const handleSearchClick = () => {
-    // Handle search button click
   };
 
   const toggleModal = useCallback(() => {
     if (showModal) {
-      // Clear form data and errors when closing the modal
       setFormData({
         firstName: '',
         lastName: '',
@@ -105,11 +102,10 @@ export const Buttons = () => {
 
   const handleAddClick = () => {
     if (validateForm()) {
-      // Handle form submission
       console.log('Form Data:', formData);
       setSuccessMessage('Data has been added successfully.');
-      toggleModal(); // Close modal after successful submission
-      setTimeout(() => setSuccessMessage(''), 3000); // Clear success message after 3 seconds
+      toggleModal();
+      setTimeout(() => setSuccessMessage(''), 3000); 
     }
   };
 

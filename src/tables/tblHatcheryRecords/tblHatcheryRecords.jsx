@@ -125,19 +125,60 @@ export const Table = () => {
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-    setFormData(prevFormData => ({
+  
+    if (id === "date") {
+      const parts = value.split("-");
+      const year = parts[0];
+  
+      if (year.length > 4) {
+        parts[0] = year.slice(0, 4);
+        event.target.value = parts.join("-");
+      }
+  
+      if (parseInt(year, 10) < 1000 || parseInt(year, 10) > 9999) {
+        setFormErrors((prevErrors) => ({
+          ...prevErrors,
+          date: "Year must be between 1000 and 9999",
+        }));
+      } else {
+        setFormErrors((prevErrors) => ({
+          ...prevErrors,
+          date: "", 
+        }));
+      }
+    }
+  
+    setFormData((prevFormData) => ({
       ...prevFormData,
-      [id]: id === 'date' ? value : value, 
+      [id]: event.target.value,
     }));
   };
+
+  
+  const handleYearInput = (event) => {
+    const value = event.target.value;
+    const parts = value.split("-");
+    const year = parts[0];
+  
+    if (year.length > 4) {
+      event.target.value = `${year.slice(0, 4)}${parts[1] ? '-' + parts[1] : ''}${parts[2] ? '-' + parts[2] : ''}`;
+    }
+  };
+  
   
   const validateForm = () => {
     const errors = {};
 
     if (!formData.island) errors.island = 'Island/Sitio is required';
     if (!formData.barangay) errors.barangay = 'Barangay is required';
-    if (!formData.date) errors.date = 'Date is required';
-    if (!formData.nestCode) errors.nestCode = 'Nest Code is required';
+    if (!formData.date) {
+      errors.date = 'Date is required';
+    } else {
+      const year = parseInt(formData.date.split("-")[0], 10);
+      if (year < 1000 || year > 9999) {
+        errors.date = 'Year must be between 1000 and 9999';
+      }
+    }    if (!formData.nestCode) errors.nestCode = 'Nest Code is required';
     if (formData.noOfEggs === '' || formData.noOfEggs < 0) {
       errors.noOfEggs = 'Number of Eggs is required and must be 0 or greater';
   }
@@ -363,10 +404,11 @@ export const Table = () => {
                     <input
                       type="date"
                       id="date"
-                      className="form-control"
+                      className={`form-control ${formErrors.date ? 'is-invalid' : ''}`}
                       value={formData.date}
                       placeholder="YYYY-MM-DD"
                       onChange={handleInputChange}
+                      onInput={handleYearInput}
                     />
 
                     {formErrors.date && (
