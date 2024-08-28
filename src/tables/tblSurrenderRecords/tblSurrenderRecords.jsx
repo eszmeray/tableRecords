@@ -324,7 +324,7 @@ export const Table = () => {
                     <label htmlFor="barangay">Barangay</label>
                     <select
                       id="barangay"
-                      className="form-control"
+                      className=ccc
                       value={formData.barangay}
                       onChange={handleInputChange}
                     >
