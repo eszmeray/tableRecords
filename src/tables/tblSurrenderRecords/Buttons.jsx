@@ -4,15 +4,23 @@ import { IoIosAdd, IoIosPrint } from "react-icons/io";
 import { FaSearch, FaSlidersH } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { useTable } from './TableContext'; // Adjust the path as necessary
+import { useTable } from './TableContext'; 
 
 
 export const Buttons = () => {
   const { surrenderers } = useTable();
-
   const [filterCriteria, setFilterCriteria] = useState('');
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Fixed comment
+  const [dropdownOpen, setDropdownOpen] = useState(false); 
   const [showModal, setShowModal] = useState(false);
+  const [minEggs, setMinEggs] = useState('');
+  const [maxEggs, setMaxEggs] = useState('');
+  const [barangayErrors, setBarangayErrors] = useState('');
+  const [dateRangeErrors, setDateRangeErrors] = useState('');
+  const [eggCountErrors, setEggCountErrors] = useState('');
+  const [selectAll, setSelectAll] = useState(false);
+  const [applyMessage, setApplyMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const modalRef = useRef(null);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -29,27 +37,13 @@ export const Buttons = () => {
   });
 
 
-  const [minEggs, setMinEggs] = useState('');
-  const [maxEggs, setMaxEggs] = useState('');
-  const [barangayErrors, setBarangayErrors] = useState('');
-  const [dateRangeErrors, setDateRangeErrors] = useState('');
-  const [eggCountErrors, setEggCountErrors] = useState('');
-  const [selectAll, setSelectAll] = useState(false);
-  const [applyMessage, setApplyMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const modalRef = useRef(null);
-
-
-
   const handleMinChange = (value) => {
     setMinEggs(value);
-    // Add your filtering logic here
     console.log('Min Eggs:', value);
   };
 
   const handleMaxChange = (value) => {
     setMaxEggs(value);
-    // Add your filtering logic here
     console.log('Max Eggs:', value);
   };
 
@@ -175,13 +169,12 @@ export const Buttons = () => {
 
         if (yearNumber < 1000 || yearNumber > currentYear) {
           setDateRangeErrors(`Year must be between 1000 and ${9999}.`);
-          return; // Exit the function if the year is out of range
+          return; 
         } else {
           setDateRangeErrors('');
         }
       }
 
-      // Update formData
       setFormData((prevFormData) => ({
         ...prevFormData,
         [id]: value,
@@ -193,7 +186,6 @@ export const Buttons = () => {
   };
 
   const handleReset = () => {
-    // Reset the filter criteria and other states related to filtering
     setFilterCriteria('');
     setFormData({
       firstName: '',
@@ -205,7 +197,6 @@ export const Buttons = () => {
     setMinEggs('');
     setMaxEggs('');
 
-    // Clear any form errors
     setFormErrors({
       firstName: '',
       lastName: '',
@@ -217,17 +208,14 @@ export const Buttons = () => {
     setDateRangeErrors('');
     setEggCountErrors('');
 
-    // Uncheck all checkboxes in the filter dropdown
     const checkboxes = document.querySelectorAll('.dropdown-menu .form-check-input');
     checkboxes.forEach(checkbox => checkbox.checked = false);
 
-    // Reset the date and egg count inputs
     document.getElementById("dateFrom").value = '';
     document.getElementById("dateTo").value = '';
     document.getElementById("eggFilterFrom").value = '';
     document.getElementById("eggFilterTo").value = '';
 
-    // Reset the select all checkbox
     setSelectAll(false);
 
     console.log('Filters have been reset');
@@ -240,7 +228,6 @@ export const Buttons = () => {
     let isValid = true;
 
 
-    // Validate Date Range
     const fromDate = document.getElementById("dateFrom").value;
     const toDate = document.getElementById("dateTo").value;
 
@@ -262,17 +249,14 @@ export const Buttons = () => {
     let errorMsg = '';
 
 
-    // Check if minEggs and maxEggs are whole numbers
     if (!Number.isInteger(parseFloat(minEggs)) || !Number.isInteger(parseFloat(maxEggs))) {
       errorMsg = 'The input must be a whole number.';
       isValid = false;
     }
-    // Check if minEggs and maxEggs are non-negative
     else if (parseInt(minEggs, 10) < 0 || parseInt(maxEggs, 10) < 0) {
       errorMsg = 'Number of eggs must be 0 or greater.';
       isValid = false;
     }
-    // Check if maxEggs is greater than or equal to minEggs
     else if (parseInt(minEggs, 10) > parseInt(maxEggs, 10)) {
       errorMsg = 'Max value should be greater.';
       isValid = false;
@@ -323,8 +307,8 @@ export const Buttons = () => {
   const handleApplyClick = () => {
     if (validateDropdownFilters()) {
       setApplyMessage('Filters have been applied successfully.');
-      setTimeout(() => setApplyMessage(''), 3000); // Hide after 3 seconds
-      handleReset(); // Optional: Reset filters after applying
+      setTimeout(() => setApplyMessage(''), 3000); 
+      handleReset(); 
     }
   };
 
@@ -490,7 +474,7 @@ export const Buttons = () => {
                       value={minEggs}
                       onChange={(e) => {
                         handleMinChange(e.target.value);
-                        validateEggCount(e.target.value, maxEggs); // Validate on change
+                        validateEggCount(e.target.value, maxEggs); 
                       }}
                       min="0"
                     />
@@ -504,7 +488,7 @@ export const Buttons = () => {
                       value={maxEggs}
                       onChange={(e) => {
                         handleMaxChange(e.target.value);
-                        validateEggCount(minEggs, e.target.value); // Validate on change
+                        validateEggCount(minEggs, e.target.value); 
                       }}
                       min="0"
                     />

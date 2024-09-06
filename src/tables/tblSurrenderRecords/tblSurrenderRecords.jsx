@@ -5,7 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import { useTable } from './TableContext'; // Adjust the path as necessary
+import { useTable } from './TableContext'; 
 
 
 

@@ -1,4 +1,3 @@
-// TableContext.jsx
 import React, { createContext, useState, useContext } from 'react';
 
 const TableContext = createContext();

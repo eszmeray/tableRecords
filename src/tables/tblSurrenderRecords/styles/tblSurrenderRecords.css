@@ -624,60 +624,41 @@
 
 .table-container input[type="checkbox"] {
   background-color: #fff;
-  /* Default background color */
   width: 15px;
   height: 15px;
   cursor: pointer;
   box-shadow: none;
-  /* No shadow for unchecked state */
   transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Checked state */
 .table-container input[type="checkbox"]:checked {
   background-color: #024533 !important;
   border-color: #024533 !important;
-  /* Ensure the border color matches */
   box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
-  /* Shadow color when checked */
 }
 
-/* Hover, active, and focus states when checked */
 .table-container input[type="checkbox"]:checked:hover,
 .table-container input[type="checkbox"]:checked:active,
 .table-container input[type="checkbox"]:checked:focus {
   background-color: #024533 !important;
-  /* Keep the same color for these states */
   border-color: #024533 !important;
-  /* Ensure the border color matches */
   box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
-  /* Consistent shadow effect */
 }
 
-/* Active state (when clicking) */
 .table-container input[type="checkbox"]:active {
   box-shadow: 0 0 0 0.4rem rgba(0, 100, 50, 0.35) !important;
-  /* Shadow effect when clicking */
   border-color: #024533 !important;
-  /* Ensure border color matches */
   border-style: none;
-  /* Add border style to maintain consistency */
 }
 
-/* Focus state for unchecked */
 .table-container input[type="checkbox"]:not(:checked):focus {
   border-color: #2828281e;
-  /* Border color on focus */
   box-shadow: none;
-  /* Remove shadow for unchecked state */
 }
 
-/* Hover state for unchecked */
 .table-container input[type="checkbox"]:hover {
   background-color: #f0f0f0;
-  /* Light background on hover */
 }
-
 
 
 .dropdown .dropdown-item {
