@@ -8,14 +8,14 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow-y: auto; 
-  overflow-x: hidden; 
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .table-responsive {
   table-layout: auto;
   border-collapse: collapse;
-  box-shadow:  0px 10px 10px #e4e4e4;
+  box-shadow: 0px 10px 10px #e4e4e4;
   border-radius: 15px;
   background-color: white;
   white-space: nowrap;
@@ -27,48 +27,48 @@
   overflow-y: hidden;
   font-size: small;
   align-items: center;
-  
 
+  display: flex;
+  justify-content: center;
 }
 
 
-/* Table row styling */
+
 .table-responsive tr {
-transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .table-responsive tr:hover {
-background-color: #f0f0f0; /* Change this to your preferred hover color */
-transform: scale(1.01); /* Slightly enlarge the row on hover */
+  background-color: #f0f0f0;
+  transform: scale(1.01);
 
 }
 
-/* Optional: Adds a subtle shadow to the row on hover for better visual depth */
 .table-responsive tr:hover {
-box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
+  box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
 }
 
 .table thead th {
-  background-color: #E9F3E2 !important; 
-  font-weight: bold; 
+  background-color: #E9F3E2 !important;
+  font-weight: bold;
   height: 80px;
   align-content: center;
-  font-size: medium;     
+  font-size: medium;
 }
 
 
 
 .table-no-border th,
 .table-no-border td {
-  border: none !important; 
-  color: #282828 !important;     
+  border: none !important;
+  color: #282828 !important;
 }
 
 
 .table-no-border {
   border-collapse: collapse;
   overflow: hidden;
-  
+
 }
 
 .actions {
@@ -86,9 +86,9 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
   border: none;
   border-radius: 5px;
   color: white;
-  font-size: 12px; 
+  font-size: 12px;
   cursor: pointer;
-  outline: none; 
+  outline: none;
   gap: 5px;
   margin-right: 15px;
   transition: background-color 0.3s, transform 0.3s;
@@ -96,31 +96,50 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
 }
 
 .action-button:hover {
-  transform: scale(1.1); 
+  transform: scale(1.1);
 }
 
 
 .action-button.edit {
-  background-color: #047857; 
+  background-color: #047857;
 }
 
 .action-button.edit:hover {
-  background-color: #E9F3E2; 
+  background-color: #E9F3E2;
   color: #024533;
 
 }
 
 .action-button.view {
-  background-color: #4f9b5b; 
+  background-color: #4f9b5b;
 }
 
 .action-button.view:hover {
-  background-color: #E9F3E2; 
+  background-color: #E9F3E2;
   color: #024533;
 
 }
 
-.row-btn{
+.action-button.map {
+  background-color: #00B272;
+}
+
+.action-button.map:hover {
+  background-color: #E9F3E2;
+  color: #024533;
+
+}
+
+
+.ascend-button .edit {
+  background-color: #047857;
+
+}
+
+
+
+
+.row-btn {
   padding-top: 5%;
   margin-left: 1%;
 
@@ -151,26 +170,26 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
   top: 0;
   z-index: 10;
   width: 100%;
-  max-width: 500px; 
-  margin: 0 auto; 
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .custom-search {
   border-radius: 10px;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
   height: 60px;
-  padding: 0 15px; 
-  flex: 1; 
+  padding: 0 15px;
+  flex: 1;
   font-size: 12px;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
 
 }
 
 .search-button {
-  background-color: #024533; 
-  border: 0px solid #ccc; 
-  border-radius: 10px; 
-  height: 60px; 
+  background-color: #024533;
+  border: 0px solid #ccc;
+  border-radius: 10px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,24 +210,24 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
 
 .search-button:hover {
   background-color: #E9F3E2;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 
 
 }
 
 .search-button:hover .search-icon {
-  color: #024533; 
-  transform: scale(1.1); 
+  color: #024533;
+  transform: scale(1.1);
 
 }
 
 
 .search-button:active {
-  background-color: #024533; 
+  background-color: #024533;
 }
 
 .search-button:active .search-icon {
-  color: #ffffff; 
+  color: #ffffff;
 }
 
 
@@ -231,21 +250,22 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
   display: flex;
   align-items: center;
 
+
 }
 
 .btn-filter {
   background-color: #E9F3E2;
   color: #024533;
-  
-  
+  width: 100% !important;
+
 
 }
 
 .btn-primary {
   background-color: #024533;
-  
-  
-  
+
+
+
 }
 
 .btn-group .btn:nth-child(1) {
@@ -257,7 +277,6 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
   color: #024533;
   font-size: 12px;
   transition: background-color 0.3s, transform 0.3s;
-  
 
 
 }
@@ -283,39 +302,94 @@ box-shadow: 0px 5px 10px rgba(56, 56, 56, 0.244);
 .btn-group .btn-filter:hover {
   background-color: #024533;
   color: white;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 
 }
 
 .btn-group .btn-primary:hover {
   background-color: #E9F3E2;
   color: #024533;
-  transform: scale(1.1); 
+  transform: scale(1.1);
 
 }
 
 .btn-group .btn:nth-child(1):active {
-  background-color: #E9F3E2; 
+  background-color: #E9F3E2;
 }
 
 .btn-group .btn:nth-child(2):active,
 .btn-group .btn:nth-child(3):active {
-  background-color: #024533; 
+  background-color: #024533;
 }
 
 
-.dropdown-menu .dropdown-item:hover {
-  background-color: #666666;
-  color: white;
+.btn-group .cancel {
+  margin-left: 5%;
+
 }
 
-.modal-footer .btn-primary{
-font-size: small;
+.btn-group .cancel,
+.btn-group .apply {
+  font-size: 12px;
+}
+
+.apply {
+  background-color: #024533 !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+
+}
+
+.apply:hover {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+
+}
+
+.cancel {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+  font-weight: 600 !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+
+}
+
+.cancel:hover {
+  background-color: #024533 !important;
+  color: white !important;
 }
 
 
-.modal-footer .btn-secondary{
-font-size: small;
+.apply:active {
+  background-color: #024533 !important;
+  border-color: transparent;
+  font-weight: 600;
+  border-color: #024533 !important;
+  color: white !important;
+
+}
+
+.cancel:active {
+  background-color: #E9F3E2 !important;
+  border-color: transparent;
+  font-weight: 600;
+  color: #024533 !important;
+}
+
+
+.modal-footer .btn-primary {
+  font-size: small;
+}
+
+
+.modal-footer .btn-secondary {
+  font-size: small;
 }
 
 .actions {
@@ -331,11 +405,11 @@ font-size: small;
   color: #26412c;
   cursor: pointer;
   font-size: 50px;
-  
+
 }
 
 .action-icon:hover {
-  color: #E9F3E2; 
+  color: #E9F3E2;
 }
 
 .action-icon:focus {
@@ -361,7 +435,7 @@ font-size: small;
 }
 
 .pagination-container .MuiTablePagination-actions .MuiIconButton-root {
-  font-size: 1rem; 
+  font-size: 1rem;
   color: #282828;
   ;
 }
@@ -373,13 +447,13 @@ font-size: small;
 
 .modal-title {
   color: #5F8D4E;
-  text-decoration: none; 
+  text-decoration: none;
   position: relative;
   display: inline-block;
 }
 
 .modal-subtitle {
-  color: #595959; 
+  color: #595959;
   opacity: 0.7;
   font-weight: 500;
   font-size: 15px;
@@ -396,19 +470,19 @@ font-size: small;
 
 
 .form-group label {
-  color: #282828; 
-  font-weight: bold; 
-  
+  color: #282828;
+  font-weight: bold;
+
 }
 
 .form-control {
-  border-radius: 0.25rem; 
-  
-  
+  border-radius: 0.25rem;
+
+
 }
 
 .form-control::placeholder {
-  color: #282828 !important; 
+  color: #282828 !important;
   opacity: 0.9 !important;
   font-weight: 450;
 
@@ -416,31 +490,31 @@ font-size: small;
 }
 
 .form-group {
-  margin-bottom: 1rem; 
-  
+  margin-bottom: 1rem;
+
 }
 
 .form-control:focus {
-  border-color: rgba(2, 69, 51, 0.2) !important; 
-  box-shadow: 0 0 0 0.2rem rgba(2, 69, 51, 0.2) !important; 
-  outline: none; 
+  border-color: rgba(2, 69, 51, 0.2) !important;
+  box-shadow: 0 0 0 0.2rem rgba(2, 69, 51, 0.2) !important;
+  outline: none;
 }
 
-.modal-footer .btn-primary{
+.modal-footer .btn-primary {
   background-color: #024533;
   border-color: transparent;
   font-weight: 600;
 }
 
-.modal-footer .btn-primary:hover{
+.modal-footer .btn-primary:hover {
   background-color: #E9F3E2;
   border-color: #024533;
   color: #024533;
-  
+
 }
 
 
-.modal-footer .btn-secondary{
+.modal-footer .btn-secondary {
   background-color: #E9F3E2;
   border-color: #024533;
   color: #024533;
@@ -449,7 +523,7 @@ font-size: small;
 
 }
 
-.modal-footer .btn-secondary:hover{
+.modal-footer .btn-secondary:hover {
   background-color: #024533;
   color: white;
 }
@@ -469,11 +543,11 @@ font-size: small;
 }
 
 
-.form-group .form-control{
+.form-group .form-control {
   font-size: smaller;
 
 }
-  
+
 .table-container {
   position: relative;
 }
@@ -484,14 +558,14 @@ font-size: small;
   left: 0;
   width: 100%;
   height: 100%;
-  background:rgba(32, 32, 32, 0.5);
-  filter: blur(1px); 
-  z-index: 1000; 
+  background: rgba(32, 32, 32, 0.5);
+  filter: blur(1px);
+  z-index: 1000;
   pointer-events: none;
 }
 
 .modal-open .table-container {
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 
@@ -501,14 +575,14 @@ font-size: small;
   left: 0;
   width: 100%;
   height: 100%;
-  background:  rgba(32, 32, 32, 0.5); 
-  filter: blur(300%); 
-  z-index: 10; 
-  pointer-events: none; 
+  background: rgba(32, 32, 32, 0.5);
+  filter: blur(300%);
+  z-index: 10;
+  pointer-events: none;
 }
 
 .modal-open .container {
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .success-message {
@@ -521,7 +595,25 @@ font-size: small;
   color: #155724;
   border: 1px solid #c3e6cb;
   border-radius: 5px;
-  z-index: 1050; 
+  z-index: 1050;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  font-weight: 500;
+  max-width: 90%;
+  text-align: center;
+}
+
+.apply-message {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  z-index: 1050;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 16px;
   font-weight: 500;
@@ -530,58 +622,187 @@ font-size: small;
 }
 
 
-
-
 .table-container input[type="checkbox"] {
-margin-left: 15px;
-width: 15px;
-height: 15px;
-cursor: pointer;
-transition: background-color 0.2s, border-color 0.2s;
+  background-color: #fff;
+  /* Default background color */
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  box-shadow: none;
+  /* No shadow for unchecked state */
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
+/* Checked state */
+.table-container input[type="checkbox"]:checked {
+  background-color: #024533 !important;
+  border-color: #024533 !important;
+  /* Ensure the border color matches */
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+  /* Shadow color when checked */
+}
+
+/* Hover, active, and focus states when checked */
+.table-container input[type="checkbox"]:checked:hover,
+.table-container input[type="checkbox"]:checked:active,
+.table-container input[type="checkbox"]:checked:focus {
+  background-color: #024533 !important;
+  /* Keep the same color for these states */
+  border-color: #024533 !important;
+  /* Ensure the border color matches */
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+  /* Consistent shadow effect */
+}
+
+/* Active state (when clicking) */
+.table-container input[type="checkbox"]:active {
+  box-shadow: 0 0 0 0.4rem rgba(0, 100, 50, 0.35) !important;
+  /* Shadow effect when clicking */
+  border-color: #024533 !important;
+  /* Ensure border color matches */
+  border-style: none;
+  /* Add border style to maintain consistency */
+}
+
+/* Focus state for unchecked */
+.table-container input[type="checkbox"]:not(:checked):focus {
+  border-color: #2828281e;
+  /* Border color on focus */
+  box-shadow: none;
+  /* Remove shadow for unchecked state */
+}
+
+/* Hover state for unchecked */
 .table-container input[type="checkbox"]:hover {
-background-color: #f0f0f0; 
-
-}
-
-.table-container input[type="checkbox"]:checked::after {
-color: white;
-font-size: 14px;
-line-height: 20px;
-text-align: center;
-display: inline-block;
-width: 20px;
-height: 20px;
-position: relative;
-top: -1px;
-left: 2px;
-
-}
-
-.table-container input[type="checkbox"]:focus {
-outline-offset: 2px;
+  background-color: #f0f0f0;
+  /* Light background on hover */
 }
 
 
-@media (max-width: 1000px) {
 
-  .App{
+.dropdown .dropdown-item {
+  color: #282828;
+
+}
+
+.dropdown .dropdown-item:active {
+  background-color: transparent;
+  color: inherit;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.dropdown .dropdown-item:hover {
+  background-color: transparent;
+  color: #282828;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.dropdown-item .form-control {
+  font-size: 12px !important;
+
+}
+
+.form-check-input {
+  background-color: #fff;
+  border: #024533;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #024533 !important;
+  border-color: #024533 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+}
+
+.form-check-input:checked:hover,
+.form-check-input:checked:active,
+.form-check-input:checked:focus {
+  background-color: #024533 !important;
+  border-color: #024533 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+}
+
+.form-check-input:active {
+  box-shadow: 0 0 0 0.4rem rgba(0, 100, 50, 0.35) !important;
+  border-color: #024533 !important;
+  border-style: none;
+}
+
+.form-check-input:not(:checked):focus {
+  border-color: #2828281e;
+  box-shadow: none;
+}
+
+.form-check-input:checked {
+  color: #024533;
+}
+
+
+.form-check-label {
+  font-size: 12px !important;
+
+}
+
+
+.row {
+  color: #282828;
+}
+
+.filterTitle {
+  color: #024533;
+}
+
+
+.label .h6 {
+  color: #024533;
+
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.filterSubtitle {
+  color: #024533;
+}
+
+.dropdown-open {
+  pointer-events: none;
+}
+
+.dropdown-open .dropdown-menu,
+.dropdown-open .btn-filter {
+  pointer-events: all;
+}
+
+
+.dropdown-menu {
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+
+.dropdown-menu.show {
+  width: 300%;
+}
+
+
+
+@media (max-width: 1200px) and (max-height: 800px) {
+
+  .App {
     overflow-x: auto;
   }
 
-
-  .table-responsive{
-    table-layout: auto;
-    width: 320px;
-      
-  
-  }
-
-  .table-no-border th,
-  .table-no-border td {
-    font-size: 10px;
-  }
 
   .action-icon {
     font-size: 10px;
@@ -589,45 +810,34 @@ outline-offset: 2px;
 
   .titleList {
     font-size: 15px;
+
   }
 
   .totalRec {
     font-size: 10px;
+    margin-right: 20%;
   }
 
-  .btn-group {
-    flex-direction: column;
 
-  }
 
   .btn-group .btn {
     margin: 5px 0;
     font-size: 10px;
   }
 
-  .search {
-    flex-direction: column;
-
-  }
+ 
 
   .custom-search {
-    height: 50px;
     font-size: 5px;
+    width: 100px !important;
+    display: block;
 
   }
 
-
-  .search-button {
-    width: 100%;
-    margin-top: 15px;
-    height: 20px; 
-    font-size: 10px; 
-    margin-right: 3%;
-  }
 
   .search-icon {
-    font-size: 10px; 
-    
+    font-size: 10px;
+
   }
 
   .pagination-container {
@@ -637,15 +847,71 @@ outline-offset: 2px;
   }
 
   .pagination-container .MuiTablePagination-actions .MuiIconButton-root {
-    font-size: 0.5rem; 
+    font-size: 0.5rem;
   }
 
   .pagination-container .MuiTablePagination-actions .MuiIconButton-root svg {
-    font-size: 0.5rem; 
+    font-size: 0.5rem;
   }
 
   .pagination-container .MuiTablePagination-select,
   .pagination-container .MuiTablePagination-displayedRows {
-    font-size: 0.5rem; 
+    font-size: 0.5rem;
+  }
+
+  .btn-group .cancel {
+    margin-left: 5%;
+
+  }
+
+  .form-control::placeholder {
+    font-size: smaller;
+  }
+
+  .form-control {
+    font-size: smaller !important;
+  }
+
+  .dropdown-menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 100vh; 
+    width: 100%; 
+  }
+  
+  .dropdown-menu.show {
+    width: 250%; 
+    height: auto; 
+    max-height: 100vh; 
+    overflow-y: auto;
+    overflow-x: hidden; 
+  }
+
+  
+.row-btn {
+  position: relative;
+font-size: smaller;
+flex-direction: column;
+display: block;
+
 }
+  
+
 }
+
+@media (max-width: 300px) {
+
+
+
+  .table-responsive {
+    table-layout: auto;
+    width: 100% !important;
+    max-width: 200% !important;
+
+  }
+
+  .table-no-border th,
+  .table-no-border td {
+    font-size: 10px;
+  }}
+

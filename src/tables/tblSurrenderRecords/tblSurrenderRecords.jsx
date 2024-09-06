@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './styles/tblSurrenderRecords.css';
 import { FaEdit, FaEye } from 'react-icons/fa';
+import { FaLocationDot } from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useTable } from './TableContext'; // Adjust the path as necessary
+
 
 
 
 const formatDate = (date) => {
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0'); 
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 };
@@ -34,14 +37,15 @@ const generateSurrenderers = (num) => {
       noOfEggs
     });
   }
-   
+
   return surrenderers;
 };
 
-const initialSurrenderers = generateSurrenderers(500);
 
 export const Table = () => {
-  const [surrenderers, setSurrenderers] = useState(initialSurrenderers);
+  const { surrenderers, setSurrenderers } = useTable();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [selectedSurrenderersIndex, setSelectedSurrenderersIndex] = useState(null);
@@ -52,6 +56,7 @@ export const Table = () => {
     date: '',
     noOfEggs: '',
   });
+  
   const [formErrors, setFormErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [selectedRows, setSelectedRows] = useState(new Set());
@@ -59,11 +64,11 @@ export const Table = () => {
 
   const editModalRef = useRef(null);
   const viewModalRef = useRef(null);
-  
+
   const toggleEditModal = (index) => {
-    const globalIndex = page * rowsPerPage + index; 
+    const globalIndex = page * rowsPerPage + index;
     const selectedSurrenderer = surrenderers[globalIndex];
-    
+
     setSelectedSurrenderersIndex(globalIndex);
     setFormData({
       firstName: selectedSurrenderer.firstName,
@@ -74,14 +79,14 @@ export const Table = () => {
     });
     setShowEditModal(!showEditModal);
   };
-  
+
   const toggleViewModal = (index) => {
-    const globalIndex = page * rowsPerPage + index; 
-    
+    const globalIndex = page * rowsPerPage + index;
+
     setSelectedSurrenderersIndex(globalIndex);
     setShowViewModal(!showViewModal);
   };
-  
+
   const handleClickOutside = (event) => {
     if (editModalRef.current && !editModalRef.current.contains(event.target)) {
       setShowEditModal(false);
@@ -108,16 +113,16 @@ export const Table = () => {
 
   const handleInputChange = (event) => {
     const { id, value } = event.target;
-  
+
     if (id === "date") {
       const parts = value.split("-");
       const year = parts[0];
-  
+
       if (year.length > 4) {
         parts[0] = year.slice(0, 4);
         event.target.value = parts.join("-");
       }
-  
+
       if (parseInt(year, 10) < 1000 || parseInt(year, 10) > 9999) {
         setFormErrors((prevErrors) => ({
           ...prevErrors,
@@ -130,7 +135,7 @@ export const Table = () => {
         }));
       }
     }
-  
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [id]: event.target.value,
@@ -141,36 +146,41 @@ export const Table = () => {
     const value = event.target.value;
     const parts = value.split("-");
     const year = parts[0];
-  
+
     if (year.length > 4) {
       event.target.value = `${year.slice(0, 4)}${parts[1] ? '-' + parts[1] : ''}${parts[2] ? '-' + parts[2] : ''}`;
     }
   };
-  
-  
+
+
   const validateForm = () => {
     const errors = {};
-  
-    if (!formData.firstName) errors.firstName = 'First name is required';
-    if (!formData.lastName) errors.lastName = 'Last name is required';
-    if (!formData.barangay) errors.barangay = 'Barangay is required';
+
+    if (!formData.firstName) errors.firstName = 'First name is required.';
+    if (!formData.lastName) errors.lastName = 'Last name is required.';
+    if (!formData.barangay) errors.barangay = 'Barangay is required.';
     if (!formData.date) {
-      errors.date = 'Date is required';
+      errors.date = 'Date is required.';
     } else {
       const year = parseInt(formData.date.split("-")[0], 10);
       if (year < 1000 || year > 9999) {
-        errors.date = 'Year must be between 1000 and 9999';
+        errors.date = 'Year must be between 1000 and 9999.';
       }
     }
-    if (formData.noOfEggs === '' || formData.noOfEggs < 0) {
-      errors.noOfEggs = 'Number of Eggs is required and must be 0 or greater';
+    if (formData.noOfEggs === '') {
+      errors.noOfEggs = 'Number of Eggs is required.';
+    } else if (formData.noOfEggs < 0) {
+      errors.noOfEggs = 'Number of Eggs must be 0 or greater.';
+    } else if (!Number.isInteger(Number(formData.noOfEggs))) {
+      errors.noOfEggs = 'The input must be a whole number.';
     }
-  
+    
+
     setFormErrors(errors);
-  
+
     return Object.keys(errors).length === 0;
   };
-  
+
   const handleSaveClick = () => {
     if (validateForm()) {
       const updatedSurrenderers = [...surrenderers];
@@ -180,12 +190,11 @@ export const Table = () => {
       setSurrenderers(updatedSurrenderers);
       setSuccessMessage('Data has been updated successfully.');
       setShowEditModal(false);
-      setTimeout(() => setSuccessMessage(''), 3000); 
+      setTimeout(() => setSuccessMessage(''), 3000);
     }
   };
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -207,7 +216,7 @@ export const Table = () => {
       return newSelectedRows;
     });
   };
-  
+
 
   const handleSelectAllChange = () => {
     if (selectAll) {
@@ -227,6 +236,10 @@ export const Table = () => {
     setSelectAll(allRowsSelected);
   }, [selectedRows, page, rowsPerPage, surrenderers]);
 
+  useEffect(() => {
+    setSurrenderers(generateSurrenderers(500));
+  }, [setSurrenderers]);
+
   return (
     <div className={`table-container`}>
       {(showEditModal || showViewModal) && (
@@ -245,6 +258,7 @@ export const Table = () => {
             <tr>
               <th>
                 <input
+                  className='form-check-input'
                   type="checkbox"
                   checked={selectAll}
                   onChange={handleSelectAllChange}
@@ -259,29 +273,32 @@ export const Table = () => {
             </tr>
           </thead>
           <tbody>
-  {surrenderers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((surrenderer, index) => (
-    <tr key={index}>
-      <td>
-        <input
-          type="checkbox"
-          checked={selectedRows.has(page * rowsPerPage + index)}
-          onChange={() => handleCheckboxChange(page * rowsPerPage + index)}
-        />
-      </td>
-      <td>{surrenderer.firstName}</td>
-      <td>{surrenderer.lastName}</td>
-      <td>{surrenderer.barangay}</td>
-      <td>{surrenderer.date}</td>
-      <td>{surrenderer.noOfEggs}</td>
-      <td>
-        <span className="actions">
-          <button onClick={() => toggleEditModal(index)} className="action-button edit"><FaEdit />Edit</button>
-          <button onClick={() => toggleViewModal(index)} className="action-button view"><FaEye />View</button>
-        </span>
-      </td>
-    </tr>
-  ))}
-</tbody>
+            {surrenderers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((surrenderer, index) => (
+              <tr key={index}>
+                <td>
+                  <input
+                    className='form-check-input'
+                    type="checkbox"
+                    checked={selectedRows.has(page * rowsPerPage + index)}
+                    onChange={() => handleCheckboxChange(page * rowsPerPage + index)}
+                  />
+                </td>
+                <td>{surrenderer.firstName}</td>
+                <td>{surrenderer.lastName}</td>
+                <td>{surrenderer.barangay}</td>
+                <td>{surrenderer.date}</td>
+                <td>{surrenderer.noOfEggs}</td>
+                <td>
+                  <span className="actions">
+                    <button onClick={() => toggleEditModal(index)} className="action-button edit"><FaEdit />Edit</button>
+                    <button onClick={() => toggleViewModal(index)} className="action-button view"><FaEye />View</button>
+                    <button onClick={() => (index)} className="action-button map"><FaLocationDot />Map</button>
+
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
 
 
         </table>
@@ -291,12 +308,12 @@ export const Table = () => {
         <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content" ref={editModalRef}>
-             
+
               <div className="modal-body">
-              <h2 className="modal-title">Edit Record</h2>
+                <h2 className="modal-title">Edit Record</h2>
                 <h6 className='modal-subtitle'>Updating information? Enter the new details here</h6>
-                <br></br>          
-                      <form>
+                <br></br>
+                <form>
                   <div className="form-group">
                     <label htmlFor="firstName">First Name</label>
                     <input
@@ -304,6 +321,7 @@ export const Table = () => {
                       className={`form-control ${formErrors.firstName ? 'is-invalid' : ''}`}
                       id="firstName"
                       value={formData.firstName}
+                      placeholder='Enter First Name'
                       onChange={handleInputChange}
                     />
                     {formErrors.firstName && <div className="invalid-feedback">{formErrors.firstName}</div>}
@@ -314,6 +332,7 @@ export const Table = () => {
                       type="text"
                       className={`form-control ${formErrors.lastName ? 'is-invalid' : ''}`}
                       id="lastName"
+                      placeholder='Enter Last Name'
                       value={formData.lastName}
                       onChange={handleInputChange}
                     />
@@ -324,7 +343,7 @@ export const Table = () => {
                     <label htmlFor="barangay">Barangay</label>
                     <select
                       id="barangay"
-                      className=ccc
+                      className={`form-control ${formErrors.barangay ? 'is-invalid' : ''}`}
                       value={formData.barangay}
                       onChange={handleInputChange}
                     >
@@ -344,9 +363,9 @@ export const Table = () => {
                     )}
                   </div>
 
-                                    
-                <div className="form-group">
-                    <label htmlFor="date">Date</label>
+
+                  <div className="form-group">
+                    <label htmlFor="date">Date Surrender</label>
                     <input
                       type="date"
                       id="date"
@@ -367,17 +386,16 @@ export const Table = () => {
                     <input
                       type="number"
                       id="noOfEggs"
-                      className="form-control"
+                      className={`form-control ${formErrors.noOfEggs ? 'is-invalid' : ''}`}
                       value={formData.noOfEggs}
                       onChange={handleInputChange}
-                      min="0" 
+                      placeholder='Enter Number of Eggs'
+                      min="0"
                     />
                     {formErrors.noOfEggs && (
                       <small className="text-danger">{formErrors.noOfEggs}</small>
                     )}
                   </div>
-
-
                 </form>
               </div>
               <div className="modal-footer">
@@ -393,11 +411,11 @@ export const Table = () => {
         <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
           <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content" ref={viewModalRef}>
-          
+
               <div className="modal-body">
-              <h2 className="modal-title">View Record</h2>
-              <h6 className='modal-subtitle'>Want to review this surrenderer? Check out their details here</h6> 
-              <br></br>
+                <h2 className="modal-title">View Record</h2>
+                <h6 className='modal-subtitle'>Want to review this surrenderer? Check out their details here</h6>
+                <br></br>
                 <p><strong>First Name:</strong> {surrenderers[selectedSurrenderersIndex].firstName}</p>
                 <p><strong>Last Name:</strong> {surrenderers[selectedSurrenderersIndex].lastName}</p>
                 <p><strong>Barangay:</strong> {surrenderers[selectedSurrenderersIndex].barangay}</p>
