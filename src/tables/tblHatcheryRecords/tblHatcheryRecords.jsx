@@ -459,9 +459,9 @@ export const Table = () => {
                 <p><strong>Barangay & Nest Code:</strong> {eggs[selectedEggIndex].barangay}</p>
                 <p><strong>Location:</strong> {eggs[selectedEggIndex].location}</p>
                 <p><strong>No. of Eggs Transplanted:</strong> {eggs[selectedEggIndex].noOfEggs}</p>
-                <p><strong>No. of Hatchlings Emerged</strong> {eggs[selectedEggIndex].noOfHatchlingsEmerged}</p>
-                <p><strong>No. of Hatchlings Released</strong> {eggs[selectedEggIndex].noOfHatchlingsReleased}</p>
-                <p><strong>Remarks</strong> {eggs[selectedEggIndex].remarks}</p>
+                <p><strong>No. of Hatchlings Emerged:</strong> {eggs[selectedEggIndex].noOfHatchlingsEmerged}</p>
+                <p><strong>No. of Hatchlings Released:</strong> {eggs[selectedEggIndex].noOfHatchlingsReleased}</p>
+                <p><strong>Remarks:</strong> {eggs[selectedEggIndex].remarks}</p>
 
               </div>
               <div className="modal-footer">
