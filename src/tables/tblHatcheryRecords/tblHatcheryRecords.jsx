@@ -326,6 +326,50 @@ export const Table = () => {
                 <br></br>
                 <form>
 
+                <div className="row justify-content-end">
+                      <div className="col-auto">
+                        <div className="form-check">
+                          <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault1" />
+                          <label className="form-check-label-source" htmlFor="flexRadioDefault1">Found by MENRO</label>
+                        </div>
+                      </div>
+                      <div className="col-auto">
+                        <div className="form-check">
+                          <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault2" />
+                          <label className="form-check-label-source" htmlFor="flexRadioDefault2">Surrendered to MENRO</label>
+                        </div>
+                      </div>
+                    </div>
+
+                <div className="form-group">
+                      <label htmlFor="firstName">First Name</label>
+                      <input
+                        type="text"
+                        className={`form-control ${formErrors.firstName ? 'is-invalid' : ''}`}
+                        id="firstName"
+                        placeholder="Enter First Name"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                      />
+
+                      {formErrors.lastName && <div className="invalid-feedback">{formErrors.lastName}</div>}
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="firstName">Last Name</label>
+                      <input
+                        type="text"
+                        className={`form-control ${formErrors.lastName ? 'is-invalid' : ''}`}
+                        id="lastName"
+                        placeholder="Enter Last Name"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                      />
+
+                      {formErrors.lastName && <div className="invalid-feedback">{formErrors.lastName}</div>}
+                    </div>
+
+
                   <div className="form-group">
                     <label htmlFor="date">Date Transplanted</label>
                     <input
@@ -423,6 +467,25 @@ export const Table = () => {
                       <small className="text-danger">{formErrors.noOfHatchlingsReleased}</small>
                     )}
                   </div>
+
+
+                  <div className="form-group">
+                      <label htmlFor="dummy">Panget</label>
+                      <select
+                        id="dummy"
+                        className={`form-control ${formErrors.dummy ? 'is-invalid' : ''}`}
+                        onChange={handleInputChange}
+                      >
+                        <option value="">Select your Pangit Agent</option>
+                        <option value="ewan">Panget 1</option>
+                        <option value="ewan">Panget 2</option>
+                        <option value="ewan">Panget 3</option>
+                      </select>
+
+                      {formErrors.dummy && (
+                        <small className="text-danger">{formErrors.dummy}</small>
+                      )}
+                    </div>
 
                   <div className="form-group">
                     <label htmlFor="remarks">Remarks</label>
