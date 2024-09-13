@@ -156,8 +156,21 @@ export const Table = () => {
   const validateForm = () => {
     const errors = {};
 
-    if (!formData.firstName) errors.firstName = 'First name is required.';
-    if (!formData.lastName) errors.lastName = 'Last name is required.';
+    if (!formData.firstName) {
+      errors.firstName = 'First Name is required';
+    } else if (!/^[\p{L}\s]+$/u.test(formData.firstName)) {
+      errors.firstName = 'First Name must only contain letters, spaces, and special characters';
+    } else if (/^\s*$/.test(formData.firstName)) {
+      errors.firstName = 'First Name must contain at least one letter';
+    }
+
+    if (!formData.lastName) {
+      errors.lastName = 'Last Name is required';
+    } else if (!/^[\p{L}\s]+$/u.test(formData.lastName)) {
+      errors.lastName = 'Last Name must only contain letters, spaces, and special characters';
+    } else if (/^\s*$/.test(formData.lastName)) {
+      errors.lastName = 'Last Name must contain at least one letter';
+    }
     if (!formData.barangay) errors.barangay = 'Barangay is required.';
     if (!formData.date) {
       errors.date = 'Date is required.';
@@ -267,8 +280,8 @@ export const Table = () => {
               <th>First Name</th>
               <th>Last Name</th>
               <th>Barangay</th>
-              <th>Date Surrender</th>
-              <th>No. Of Eggs</th>
+              <th>Date Surrendered</th>
+              <th>No. of Eggs Surrendered</th>
               <th>Action</th>
             </tr>
           </thead>

@@ -273,8 +273,7 @@ export const Buttons = () => {
   const validateForm = () => {
     const errors = {};
 
-    if (!formData.firstName) errors.firstName = 'First name is required';
-    if (!formData.lastName) errors.lastName = 'Last name is required';
+ 
     if (!formData.barangay) errors.barangay = 'Barangay is required';
     if (!formData.date) {
       errors.date = 'Date is required';
@@ -462,7 +461,7 @@ export const Buttons = () => {
                 {dateRangeErrors && <p className="text-danger">{dateRangeErrors}</p>}
               </div>
               <div className="dropdown-item">
-                <h6 className="filterSubtitle">Number of Eggs</h6>
+                <h6 className="filterSubtitle">No. of Eggs Surrendered</h6>
                 <hr />
                 <div className="row">
                   <div className="col-6">
