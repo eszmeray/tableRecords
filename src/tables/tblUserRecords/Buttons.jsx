@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './styles/tblUserRecords.css';
-import { IoIosFunnel, IoIosAdd, IoIosPrint } from "react-icons/io";
+import { IoIosFunnel, IoIosAdd } from "react-icons/io";
 import { FaSearch } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
@@ -10,16 +10,16 @@ export const Buttons = () => {
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
+    middleName: '',
     lastName: '',
     role: '',
-    password: '',
     email: '',
   });
   const [formErrors, setFormErrors] = useState({
     firstName: '',
+    middleName: '',
     lastName: '',
     role: '',
-    password: '',
     email: '',
   });
   const [successMessage, setSuccessMessage] = useState('');
@@ -40,16 +40,16 @@ export const Buttons = () => {
     if (showModal) {
       setFormData({
         firstName: '',
+        middleName: '',
         lastName: '',
         role: '',
-        password: '',
         email: '',
       });
       setFormErrors({
         firstName: '',
+        middleName: '',
         lastName: '',
         role: '',
-        password: '',
         email: '',
       });
     }
@@ -89,9 +89,9 @@ export const Buttons = () => {
     const errors = {};
 
     if (!formData.firstName) errors.firstName = 'First name is required';
+    if (!formData.middleName) errors.middleName = 'Middle name is required';
     if (!formData.lastName) errors.lastName = 'Last name is required';
     if (!formData.role) errors.role = 'Role is required';
-    if (!formData.password) errors.password = 'Password is required';
     if (!formData.email) errors.email = 'Email is required';
     else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = 'Email is invalid';
 
@@ -140,7 +140,6 @@ export const Buttons = () => {
             </div>
           </div>
           <button className="btn btn-primary" onClick={toggleModal}><IoIosAdd /> NEW RECORD</button>
-          <button className="btn btn-primary print"><IoIosPrint /> Print Records</button>
         </div>
       </div>
 
@@ -174,6 +173,20 @@ export const Buttons = () => {
                       />
                       {formErrors.firstName && <div className="invalid-feedback">{formErrors.firstName}</div>}
                     </div>
+
+                    <div className="form-group">
+                      <label htmlFor="firstName">Middle Name</label>
+                      <input
+                        type="text"
+                        className={`form-control ${formErrors.middleName ? 'is-invalid' : ''}`}
+                        id="middleName"
+                        placeholder="Enter middle name"
+                        value={formData.middleName}
+                        onChange={handleInputChange}
+                      />
+                      {formErrors.middleName && <div className="invalid-feedback">{formErrors.middleName}</div>}
+                    </div>
+
                     <div className="form-group">
                       <label htmlFor="lastName">Last Name</label>
                       <input
@@ -200,18 +213,7 @@ export const Buttons = () => {
                       </select>
                       {formErrors.role && <div className="invalid-feedback">{formErrors.role}</div>}
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="password">Password</label>
-                      <input
-                        type="password"
-                        className={`form-control ${formErrors.password ? 'is-invalid' : ''}`}
-                        id="password"
-                        placeholder="Enter password"
-                        value={formData.password}
-                        onChange={handleInputChange}
-                      />
-                      {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
-                    </div>
+                 
                     <div className="form-group">
                       <label htmlFor="email">Email</label>
                       <input

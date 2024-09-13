@@ -4,29 +4,25 @@ import { IoIosFunnel, IoIosAdd, IoIosPrint } from "react-icons/io";
 import { FaSearch } from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import { useTable } from './TableContext'; 
 
 export const Buttons = () => {
+  const { eggs } = useTable();
   const [filterCriteria, setFilterCriteria] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
-    island: '',
-    barangay: '',
-    municipality: '',
-    province: '',
     date: '',
-    nestCode: '',
+    barangay: '',
+    location: '',
     noOfEggs: '',
     noOfHatchlingsEmerged: '',
     noOfHatchlingsReleased: '',
     remarks: ''
   });
   const [formErrors, setFormErrors] = useState({
-    island: '',
-    barangay: '',
-    municipality: '',
-    province: '',
     date: '',
-    nestCode: '',
+    barangay: '',
+    location: '',
     noOfEggs: '',
     noOfHatchlingsEmerged: '',
     noOfHatchlingsReleased: '',
@@ -39,6 +35,13 @@ export const Buttons = () => {
     setFilterCriteria(criteria);
   };
 
+
+  
+  const handleSelectAllChange = (event) => {
+    const isChecked = event.target.checked;
+    handleFilterChange(isChecked, true);
+  };
+
   const handleSearchChange = (event) => {
     const searchValue = event.target.value;
   };
@@ -49,24 +52,18 @@ export const Buttons = () => {
   const toggleModal = useCallback(() => {
     if (showModal) {
       setFormData({
-        island: '',
-        barangay: '',
-        municipality: '',
-        province: '',
         date: '',
-        nestCode: '',
+        barangay: '',
+        location: '',
         noOfEggs: '',
         noOfHatchlingsEmerged: '',
         noOfHatchlingsReleased: '',
         remarks: ''
       });
       setFormErrors({
-        island: '',
-        barangay: '',
-        municipality: '',
-        province: '',
         date: '',
-        nestCode: '',
+        barangay: '',
+        location: '',
         noOfEggs: '',
         noOfHatchlingsEmerged: '',
         noOfHatchlingsReleased: '',
@@ -142,7 +139,6 @@ export const Buttons = () => {
   const validateForm = () => {
     const errors = {};
 
-    if (!formData.island) errors.island = 'Island is required';
     if (!formData.barangay) errors.barangay = 'Barangay is required';
     if (!formData.date) {
       errors.date = 'Date is required';
@@ -151,7 +147,7 @@ export const Buttons = () => {
       if (year < 1000 || year > 9999) {
         errors.date = 'Year must be between 1000 and 9999';
       }
-    }    if (!formData.nestCode) errors.nestCode = 'Nest code is required';
+    }   
     if (formData.noOfEggs === '' || formData.noOfEggs < 0) {
       errors.noOfEggs = 'Number of Eggs is required and must be 0 or greater';
   }
@@ -182,7 +178,7 @@ export const Buttons = () => {
     <div className="container my-12">
       <div className="row-btn d-flex justify-content-between align-items-center mb-3">
         <h2 className='titleList'>List of Hatchery Eggs
-          <p className='totalRec'>90 total records</p>
+        <p className='totalRec'>{eggs.length} total records</p>
         </h2>
 
         <div className='search'>
@@ -202,12 +198,9 @@ export const Buttons = () => {
               Filter by type <IoIosFunnel className='funnel-icon' />
             </button>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('sitio')}>Island/Sitio</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('barangay')}>Barangay</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('municipality')}>Municipality</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('province')}>Province</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('date')}>Date</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('nestcode')}>Nest Code</a>
+            <a className="dropdown-item" href="#" onClick={() => handleFilterChange('date')}>Date Transplanted</a>
+              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('barangay')}>Barangay & Nest Code</a>
+              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('location')}>Location</a>
               <a className="dropdown-item" href="#" onClick={() => handleFilterChange('transplant')}>No. of Transplanted Eggs</a>
               <a className="dropdown-item" href="#" onClick={() => handleFilterChange('emerge')}>No. of Hatchlings Emerged</a>
               <a className="dropdown-item" href="#" onClick={() => handleFilterChange('release')}>No. of Hatchlings Released</a>
@@ -237,76 +230,8 @@ export const Buttons = () => {
                 <h6 className='modal-subtitle'>Ready to create something new? Enter the hatchery info here!</h6>
                 <br></br>
                   <form>
-                    <div className="form-group">
-                      <label htmlFor="island">Island/Sitio</label>
-                      <select
-                        type="text"
-                        className={`form-control ${formErrors.island ? 'is-invalid' : ''}`}
-                        id="island"
-                        placeholder="Enter island"
-                        value={formData.island}
-                        onChange={handleInputChange}
-                      >
-                        <option value="">Select Island/Sitio</option>
-                        <option value="anakdagat">Island 1</option>
-                        <option value="maguihan">Island 2</option>     
-                        <option value="maguihan">Island 3</option>                     
-                      </select>
-                      {formErrors.island && <div className="invalid-feedback">{formErrors.island}</div>}
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="barangay">Barangay</label>
-                      <select
-                        type="text"
-                        className={`form-control ${formErrors.barangay ? 'is-invalid' : ''}`}
-                        id="barangay"
-                        placeholder="Enter barangay"
-                        value={formData.barangay}
-                        onChange={handleInputChange}
-                      
-                        >
-                        <option value="">Select Barangay</option>
-                        <option value="anakdagat">Anak Dagat</option>
-                        <option value="maguihan">Maguihan</option>
-                        <option value="mataasnabayan">Mataas na Bayan</option>
-                        <option value="maligaya">Maligaya</option>
-                        <option value="nonongcasto">Nonong Casto</option>
-                        <option value="sambalibaba">Sambal Ibaba</option>
-                        <option value="sambalilaya">Sambal Ilaya</option>
-                        <option value="wawaibaba">Wawa Ibaba</option>
-                        <option value="wawailaya">Wawa Ilaya</option>                      
-                      </select>
-                      {formErrors.barangay && <div className="invalid-feedback">{formErrors.barangay}</div>}
-                    </div>
-                    <div className="form-group">
-                    <label htmlFor="municipality">Municipality</label>
-                    <input
-                      type="text"
-                      className={`form-control read-only-field ${formErrors.municipality ? 'is-invalid' : ''}`}
-                      id="municipality"
-                      placeholder="Lemery"
-                      value={formData.municipality}
-                      onChange={handleInputChange}
-                      readOnly
-                    />
-                    {formErrors.municipality && <div className="invalid-feedback">{formErrors.municipality}</div>}
-                  </div>
                   <div className="form-group">
-                    <label htmlFor="province">Province</label>
-                    <input
-                      type="text"
-                      className={`form-control read-only-field ${formErrors.province ? 'is-invalid' : ''}`}
-                      id="province"
-                      placeholder="Batangas"
-                      value={formData.province}
-                      onChange={handleInputChange}
-                      readOnly
-                    />
-                    {formErrors.province && <div className="invalid-feedback">{formErrors.province}</div>}
-                  </div>
-
-                    <div className="form-group">
-                      <label htmlFor="date">Date</label>
+                      <label htmlFor="date">Date Transplanted</label>
                       <input
                       type="date"
                       id="date"
@@ -318,28 +243,47 @@ export const Buttons = () => {
                     />
                       {formErrors.date && <div className="invalid-feedback">{formErrors.date}</div>}
                     </div>
+
+                  <div className="form-group">
+                    <label htmlFor="barangay">Barangay & Nest Code</label>
+                    <select
+                      id="barangay"
+                      className={`form-control ${formErrors.barangay ? 'is-invalid' : ''}`}
+                      onChange={handleInputChange}
+                    >
+                      <option value="">Select Nest Code</option>
+                      <option value="NC-01">NC-01</option>
+                      <option value="NC-02">NC-02</option>
+                      <option value="NC-03">NC-03</option>
+                    </select>
+
+                    {formErrors.barangay && (
+                      <small className="text-danger">{formErrors.barangay}</small>
+                    )}
+                  </div>
+
                     <div className="form-group">
-                      <label htmlFor="nestCode">Nest Code</label>
-                      <select
-                        className={`form-control ${formErrors.nestCode ? 'is-invalid' : ''}`}
-                        id="nestCode"
-                        value={formData.nestCode}
-                        onChange={handleInputChange}
-                      >
-                        <option value="">Select Nest Code</option>
-                        <option value="code">NC1</option>
-                        <option value="code">NC2</option>
-                        <option value="code">NC3</option>
-                      </select>
-                      {formErrors.nestCode && <div className="invalid-feedback">{formErrors.nestCode}</div>}
-                    </div>
+                    <label htmlFor="location">Location</label>
+                    <input
+                      type="text"
+                      className={`form-control read-only-field ${formErrors.location ? 'is-invalid' : ''}`}
+                      id="location"
+                      placeholder="Lemery, Batangas"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                      readOnly
+                    />
+                    {formErrors.location && <div className="invalid-feedback">{formErrors.location}</div>}
+                  </div>
+                 
+                 
                     <div className="form-group">
                       <label htmlFor="noOfEggs">Number of Eggs Transplanted</label>
                       <input
                         type="number"
                         className={`form-control ${formErrors.noOfEggs ? 'is-invalid' : ''}`}
                         id="noOfEggs"
-                        placeholder="Enter number of eggs"
+                        placeholder="Enter Number of Eggs"
                         value={formData.noOfEggs}
                         onChange={handleInputChange}
                         min="0" 
@@ -353,7 +297,7 @@ export const Buttons = () => {
                         type="number"
                         className={`form-control ${formErrors.noOfHatchlingsEmerged ? 'is-invalid' : ''}`}
                         id="noOfHatchlingsEmerged"
-                        placeholder="Enter number of hatchlings emerged"
+                        placeholder="Enter Number of Hatchlings Emerged"
                         value={formData.noOfHatchlingsEmerged}
                         onChange={handleInputChange}
                         min="0"
@@ -367,7 +311,7 @@ export const Buttons = () => {
                         type="number"
                         className={`form-control ${formErrors.noOfHatchlingsReleased ? 'is-invalid' : ''}`}
                         id="noOfHatchlingsReleased"
-                        placeholder="Enter number of hatchlings released"
+                        placeholder="Enter Number of Hatchlings Released"
                         value={formData.noOfHatchlingsReleased}
                         onChange={handleInputChange}
                         min="0" 
@@ -380,7 +324,7 @@ export const Buttons = () => {
                       <textarea
                         className={`form-control ${formErrors.remarks ? 'is-invalid' : ''}`}
                         id="remarks"
-                        placeholder="Enter remarks"
+                        placeholder="Enter Remarks"
                         value={formData.remarks}
                         onChange={handleInputChange}
                       />
