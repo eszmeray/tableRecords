@@ -16,6 +16,18 @@ export const Buttons = () => {
   const modalRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
+  const [statusErrors, setStatusErrors] = useState('');
+  const [dateRangeErrors, setDateRangeErrors] = useState('');
+  const [barangayErrors, setBarangayErrors] = useState('');
+  const [minEggs, setMinEggs] = useState('');
+  const [maxEggs, setMaxEggs] = useState('');
+  const [eggCountErrors, setEggCountErrors] = useState('');
+  const [minHatchlings, setMinHatchlings] = useState('');
+  const [maxHatchlings, setMaxHatchlings] = useState('');
+  const [hatchlingsCountErrors, setHatchlingsCountErrors] = useState('');
+  const [minReleased, setMinReleased] = useState('');
+  const [maxReleased, setMaxReleased] = useState('');
+  const [releasedCountErrors, setReleasedCountErrors] = useState('');
   const [formData, setFormData] = useState({
     date: '',
     barangay: '',
@@ -36,10 +48,44 @@ export const Buttons = () => {
   });
 
 
+
+  const handleMinChange = (value) => {
+    setMinEggs(value);
+    console.log('Min Eggs:', value);
+  };
+
+  const handleMaxChange = (value) => {
+    setMaxEggs(value);
+    console.log('Max Eggs:', value);
+  };
+
+  const handleMinHatchlingsChange = (value) => {
+    setMinHatchlings(value);
+    console.log('Min Hatchlings:', value);
+  };
+
+  const handleMaxHatchlingsChange = (value) => {
+    setMaxHatchlings(value);
+    console.log('Max Hatchlings:', value);
+  };
+
+
+  const handleMinReleased = (value) => {
+    setMinReleased(value);
+    console.log('Min Hatchlings:', value);
+  };
+
+  const handleMaxReleased = (value) => {
+    setMaxReleased(value);
+    console.log('Max Hatchlings:', value);
+  };
+
+
+
   const handleFilterChange = (criteria, isSelectAll = false) => {
     if (isSelectAll) {
       setSelectAll(criteria);
-      const checkboxes = document.querySelectorAll('.dropdown-menu .form-check-input[data-category="role"]');
+      const checkboxes = document.querySelectorAll('.dropdown-menu .form-check-input[data-category="barangay"]');
       checkboxes.forEach(checkbox => {
         checkbox.checked = criteria;
       });
@@ -147,6 +193,33 @@ export const Buttons = () => {
     }
   };
 
+  const handleDateChange = (event) => {
+    const { id, value } = event.target;
+    const [year, month, day] = value.split('-');
+    const currentYear = new Date().getFullYear();
+
+    if (id === 'dateFrom' || id === 'dateTo') {
+      if (year) {
+        const yearNumber = parseInt(year, 10);
+
+        if (yearNumber < 1000 || yearNumber > currentYear) {
+          setDateRangeErrors(`Year must be between 1000 and ${9999}.`);
+          return;
+        } else {
+          setDateRangeErrors('');
+        }
+      }
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [id]: value,
+      }));
+
+    };
+
+    handleFilterChange(`${id}:${value}`);
+  };
+
 
   const handleApplyClick = () => {
     if (validateDropdownFilters()) {
@@ -157,42 +230,149 @@ export const Buttons = () => {
   };
 
 
+
   const validateDropdownFilters = () => {
     let isValid = true;
+
+
+    const fromDate = document.getElementById("dateFrom").value;
+    const toDate = document.getElementById("dateTo").value;
+
+    if (new Date(fromDate) > new Date(toDate)) {
+      setDateRangeErrors('The end date must be on or after the start date.');
+      isValid = false;
+    } else {
+      setDateRangeErrors('');
+    }
 
 
     return isValid;
   };
 
+  const validateEggCount = (minEggs, maxEggs) => {
+    let isValid = true;
+    let errorMsg = '';
+
+
+    if (!Number.isInteger(parseFloat(minEggs)) || !Number.isInteger(parseFloat(maxEggs))) {
+      errorMsg = 'The input must be a whole number.';
+      isValid = false;
+    }
+    else if (parseInt(minEggs, 10) < 0 || parseInt(maxEggs, 10) < 0) {
+      errorMsg = 'Number of eggs must be 0 or greater.';
+      isValid = false;
+    }
+    else if (parseInt(minEggs, 10) > parseInt(maxEggs, 10)) {
+      errorMsg = 'Max value should be greater.';
+      isValid = false;
+    }
+    else {
+      errorMsg = '';
+    }
+
+    setEggCountErrors(errorMsg);
+    return isValid;
+  };
+
+  const validateHatchlingsCount = (minHatchlings, maxHatchlings) => {
+    let isValid = true;
+    let errorMsg = '';
+  
+    if (!Number.isInteger(parseFloat(minHatchlings)) || !Number.isInteger(parseFloat(maxHatchlings))) {
+      errorMsg = 'The input must be a whole number.';
+      isValid = false;
+    } else if (parseInt(minHatchlings, 10) < 0 || parseInt(maxHatchlings, 10) < 0) {
+      errorMsg = 'Number of hatchlings must be 0 or greater.';
+      isValid = false;
+    } else if (parseInt(minHatchlings, 10) > parseInt(maxHatchlings, 10)) {
+      errorMsg = 'Max value should be greater.';
+      isValid = false;
+    } else {
+      errorMsg = '';
+    }
+  
+    setHatchlingsCountErrors(errorMsg);
+    return isValid;
+  };
+
+  const validateReleasedCount = (minReleased, maxReleased) => {
+    let isValid = true;
+    let errorMsg = '';
+  
+    if (!Number.isInteger(parseFloat(minReleased)) || !Number.isInteger(parseFloat(maxReleased))) {
+      errorMsg = 'The input must be a whole number.';
+      isValid = false;
+    } else if (parseInt(minReleased, 10) < 0 || parseInt(maxReleased, 10) < 0) {
+      errorMsg = 'Number of hatchlings must be 0 or greater.';
+      isValid = false;
+    } else if (parseInt(minReleased, 10) > parseInt(maxReleased, 10)) {
+      errorMsg = 'Max value should be greater.';
+      isValid = false;
+    } else {
+      errorMsg = '';
+    }
+  
+    setReleasedCountErrors(errorMsg);
+    return isValid;
+  };
+  
+
 
   const handleReset = () => {
     setFilterCriteria('');
     setFormData({
-      firstName: '',
-      lastName: '',
-      role: '',
-
+      status: '',
+      date: '',
+      barangay: '',
+      noOfEggs: '',
+      noOfHatchlingsEmerged: '',
     });
-
+    setMinEggs('');
+    setMaxEggs('');
+    setMinHatchlings('');
+    setMaxHatchlings('');
+    setMinReleased('');
+    setMaxReleased('');
 
     setFormErrors({
-      firstName: '',
-      lastName: '',
-      role: '',
+      status: '',
+      date: '',
+      barangay: '',
+      noOfEggs: '',
+      noOfHatchlingsEmerged: '',
 
     });
-
+    setStatusErrors('');
+    setDateRangeErrors('');
+    setBarangayErrors('');
+    setEggCountErrors('');
+    setHatchlingsCountErrors('');
+    setReleasedCountErrors('');
+    
     const checkboxes = document.querySelectorAll('.dropdown-menu .form-check-input');
     checkboxes.forEach(checkbox => checkbox.checked = false);
+  
+    document.getElementById("dateFrom").value = '';
+    document.getElementById("dateTo").value = '';
+  
+    document.getElementById("hatchlingsDateFrom").value = '';
+    document.getElementById("hatchlingsDateTo").value = '';
+  
+    document.getElementById("eggFilterFrom").value = '';
+    document.getElementById("eggFilterTo").value = '';
+  
+    document.getElementById("hatchlingsFilterFrom").value = '';
+    document.getElementById("hatchlingsFilterTo").value = '';
 
-
+    document.getElementById("releasedFilterFrom").value = '';
+    document.getElementById("releasedFilterTo").value = '';
+  
     setSelectAll(false);
-
+  
     console.log('Filters have been reset');
   };
+  
 
-
-//mali pa ung sa filters wait HAHAHHAAHA pang user pala amp
 
   const validateForm = () => {
     const errors = {};
@@ -268,117 +448,268 @@ export const Buttons = () => {
           </button>
         </div>
         <div className='btn-group'>
-          <div className="dropdown">
-            <button className="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded={dropdownOpen}>
-              <FaSlidersH className='funnel-icon' /> Sorting Options
-            </button>
+  <div className="dropdown">
+    {/* Filter Button */}
+    <button
+      className="btn btn-filter dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded={dropdownOpen}
+    >
+      <FaSlidersH className='funnel-icon' /> Sorting Options
+    </button>
 
-            <div className={`dropdown-menu p-3 ${dropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
-              <h5 className='filterTitle'>Sort by Category</h5>
-              <div className="dropdown-item">
+    <div className={`dropdown-menu p-3 ${dropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+      <h5 className='filterTitle'>Sort by Category</h5>
 
-                <div className="row">
-                  <div className="col-md-6">
-                    <h6 className="filterSubtitle">First Name</h6>
-                    <hr></hr>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault1" />
-                      <label className="form-check-label" htmlFor="flexRadioDefault1">
-                        Ascending
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault2" />
-                      <label className="form-check-label" htmlFor="flexRadioDefault2">
-                        Descending
-                      </label>
-                    </div>
-                  </div>
+      <div className="dropdown-item">
+  <h6 className='filterSubtitle'>Status</h6>
+  <hr />
+  <div className="row">
+    <div className="col-6">
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          data-category="status"
+          id="foundBy"
+        />
+        <label className="form-check-label" htmlFor="foundBy">Found by MENRO</label>
+      </div>
+    </div>
+    <div className="col-6">
+      <div className="form-check">
+        <input
+          className="form-check-input"
+          type="checkbox"
+          data-category="status"
+          id="surrenderedTo"
+        />
+        <label className="form-check-label" htmlFor="surrenderedTo">Surrendered to MENRO</label>
+      </div>
+    </div>
+  </div>
+  {statusErrors && <p className="text-danger">{statusErrors}</p>}
+</div>
 
-                  <div className="col-md-6">
-                    <h6 className="filterSubtitle">Last Name</h6>
-                    <hr></hr>
 
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefaultLastName" id="flexRadioDefault3" />
-                      <label className="form-check-label" htmlFor="flexRadioDefault3">
-                        Ascending
-                      </label>
-                    </div>
-                    <div className="form-check">
-                      <input className="form-check-input" type="radio" name="flexRadioDefaultLastName" id="flexRadioDefault4" />
-                      <label className="form-check-label" htmlFor="flexRadioDefault4">
-                        Descending
-                      </label>
-                    </div>
-                  </div>
+      <div className="dropdown-item">
+        <h6 className="filterSubtitle">Egg Transplant Date Range</h6>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <input
+              type="date"
+              id="dateFrom"
+              className="form-control"
+              onChange={handleDateChange}
+              max={new Date().toISOString().split("T")[0]}
+            />
+          </div>
+          <div className="col-6">
+            <input
+              type="date"
+              id="dateTo"
+              className="form-control"
+              onChange={handleDateChange}
+              max={new Date().toISOString().split("T")[0]}
+            />
+          </div>
+        </div>
+        {dateRangeErrors && <p className="text-danger">{dateRangeErrors}</p>}
+      </div>
 
-                  <div className="dropdown-item">
-                    <h6 className="filterSubtitle">Role</h6>
-                    <hr />
-                    <div className="container">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              data-category="role"
-                              onChange={() => handleFilterChange('superAdmin')}
-                              id="superAdmin"
-                            />
-                            <label className="form-check-label" htmlFor="superAdmin">Super Admin</label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              data-category="role"
-                              onChange={() => handleFilterChange('admin')}
-                              id="admin"
-                            />
-                            <label className="form-check-label" htmlFor="admin">Admin</label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              data-category="role"
-                              onChange={() => handleFilterChange('menro')}
-                              id="menro"
-                            />
-                            <label className="form-check-label" htmlFor="menro">MENRO</label>
-                          </div>
-                        </div>
+      <div className="dropdown-item">
+        <h6 className='filterSubtitle'>Barangay (Nesting Site)</h6>
+        <hr />
+        <div className="row">
+          <div className="col-md-6">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Anak Dagat')} id="anakDagat" />
+              <label className="form-check-label" htmlFor="anakDagat">Anak Dagat</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Maugihan')} id="maugihan" />
+              <label className="form-check-label" htmlFor="maugihan">Maugihan</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Mataas na Bayan')} id="mataasNaBayan" />
+              <label className="form-check-label" htmlFor="mataasNaBayan">Mataas na Bayan</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Maligaya')} id="maligaya" />
+              <label className="form-check-label" htmlFor="maligaya">Maligaya</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Nonong Casto')} id="nonongCasto" />
+              <label className="form-check-label" htmlFor="nonongCasto">Nonong Casto</label>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Sambal Ibaba')} id="sambalIbaba" />
+              <label className="form-check-label" htmlFor="sambalIbaba">Sambal Ibaba</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Sambal Ilaya')} id="sambalIlaya" />
+              <label className="form-check-label" htmlFor="sambalIlaya">Sambal Ilaya</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Talaga')} id="wawaIbaba" />
+              <label className="form-check-label" htmlFor="wawaIbaba">Wawa Ibaba</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" data-category="barangay" onChange={() => handleFilterChange('Wawa Ilaya')} id="wawaIlaya" />
+              <label className="form-check-label" htmlFor="wawaIlaya">Wawa Ilaya</label>
+            </div>
+            <div className="form-check">
+              <input className="form-check-input" type="checkbox" id="selectAllBarangays" checked={selectAll} onChange={handleSelectAllChange} />
+              <label className="form-check-label" htmlFor="selectAllBarangays">Select All</label>
+            </div>
+          </div>
+          {barangayErrors && <p className="text-danger">{barangayErrors}</p>}
+        </div>
+      </div>
 
-                        <div className="col-md-6">
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              data-category="role"
-                              onChange={() => handleFilterChange('bantayDagat')}
-                              id="bantayDagat"
-                            />
-                            <label className="form-check-label" htmlFor="bantayDagat">Bantay Dagat</label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="checkbox"
-                              id="selectAllRoles"
-                              checked={selectAll}
-                              onChange={handleSelectAllChange}
-                            />
-                            <label className="form-check-label" htmlFor="selectAllRoles">Select All</label>
-                          </div>
-                        </div>
-                      </div>
-                      {roleErrors && <p className="text-danger">{roleErrors}</p>}
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div className="dropdown-item">
+        <h6 className="filterSubtitle">No. of Eggs Transplanted</h6>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="eggFilterFrom"
+              placeholder="Min"
+              value={minEggs}
+              onChange={(e) => {
+                handleMinChange(e.target.value);
+                validateEggCount(e.target.value, maxEggs);
+              }}
+              min="0"
+            />
+          </div>
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="eggFilterTo"
+              placeholder="Max"
+              value={maxEggs}
+              onChange={(e) => {
+                handleMaxChange(e.target.value);
+                validateEggCount(minEggs, e.target.value);
+              }}
+              min="0"
+            />
+          </div>
+        </div>
+        {eggCountErrors && <p className="text-danger mt-2">{eggCountErrors}</p>}
+      </div>
+
+      <div className="dropdown-item">
+        <h6 className="filterSubtitle">Hatchlings Emergence Date Range</h6>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <input
+              type="date"
+              id="hatchlingsDateFrom"
+              className="form-control"
+              onChange={handleDateChange}
+              max={new Date().toISOString().split("T")[0]}
+            />
+          </div>
+          <div className="col-6">
+            <input
+              type="date"
+              id="hatchlingsDateTo"
+              className="form-control"
+              onChange={handleDateChange}
+              max={new Date().toISOString().split("T")[0]}
+            />
+          </div>
+        </div>
+        {dateRangeErrors && <p className="text-danger">{dateRangeErrors}</p>}
+      </div>
+
+      <div className="dropdown-item">
+        <h6 className="filterSubtitle">No. of Hatchlings Emerged</h6>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="hatchlingsFilterFrom"
+              placeholder="Min"
+              value={minHatchlings}
+              onChange={(e) => {
+                handleMinHatchlingsChange(e.target.value);
+                validateHatchlingsCount(e.target.value, maxHatchlings);
+              }}
+              min="0"
+            />
+          </div>
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="hatchlingsFilterTo"
+              placeholder="Max"
+              value={maxHatchlings}
+              onChange={(e) => {
+                handleMaxHatchlingsChange(e.target.value);
+                validateHatchlingsCount(maxHatchlings, e.target.value);
+              }}
+              min="0"
+            />
+          </div>
+        </div>
+        {hatchlingsCountErrors && <p className="text-danger mt-2">{hatchlingsCountErrors}</p>}
+      </div>
+
+      <div className="dropdown-item">
+        <h6 className="filterSubtitle">No. of Hatchlings Released</h6>
+        <hr />
+        <div className="row">
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="releasedFilterFrom"
+              placeholder="Min"
+              value={minReleased}
+              onChange={(e) => {
+                handleMinReleased(e.target.value);
+                validateReleasedCount(e.target.value, maxReleased);
+              }}
+              min="0"
+            />
+          </div>
+          <div className="col-6">
+            <input
+              type="number"
+              className="form-control"
+              id="releasedFilterTo"
+              placeholder="Max"
+              value={maxReleased}
+              onChange={(e) => {
+                handleMaxReleased(e.target.value);
+                validateReleasedCount(maxReleased, e.target.value);
+              }}
+              min="0"
+            />
+          </div>
+        </div>
+        {releasedCountErrors && <p className="text-danger mt-2">{releasedCountErrors}</p>}
+      </div>
+
+
+<br></br>
+
               <div className="filter-btn-grp d-flex justify-content-between">
                 <button className="btn btn-secondary cancel" onClick={handleReset}>CANCEL</button>
                 <button className="btn btn-primary apply" onClick={handleApplyClick}>APPLY</button>
@@ -518,7 +849,7 @@ export const Buttons = () => {
                         min="0"
 
                       />
-                      {formErrors.noOfEggs && <div className="invalid-feedback">{formErrors.noOfEggs}</div>}
+                      {formErrors.noOfEggs && <div className="invalid-feedback">{formErrors.noOfHatchlingsEmerged}</div>}
                     </div>
                     <div className="form-group">
                       <label htmlFor="noOfHatchlingsEmerged">No. of Hatchlings Emerged</label>
@@ -549,7 +880,7 @@ export const Buttons = () => {
                       {formErrors.noOfHatchlingsReleased && <div className="invalid-feedback">{formErrors.noOfHatchlingsReleased}</div>}
                     </div>
 
-   
+
                     <div className="form-group">
                       <label htmlFor="dummy">Panget</label>
                       <select
@@ -567,7 +898,7 @@ export const Buttons = () => {
                         <small className="text-danger">{formErrors.dummy}</small>
                       )}
                     </div>
-                    
+
                     <div className="form-group">
                       <label htmlFor="remarks">Remarks</label>
                       <textarea
@@ -581,7 +912,7 @@ export const Buttons = () => {
                     </div>
                   </form>
 
-                  
+
                 </div>
                 <div className="modal-footer">
                   <button type="button" className="btn btn-secondary" onClick={toggleModal}>CANCEL</button>
