@@ -332,6 +332,19 @@
   font-size: 12px;
 }
 
+ 
+.filter-btn-grp .apply {
+  background-color: #024533 !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+  height: 100% !important;
+  width: 50% !important;
+}
+
+
 .apply {
   background-color: #024533 !important;
   border-color: transparent !important;
@@ -346,6 +359,18 @@
   background-color: #E9F3E2 !important;
   border-color: #024533 !important;
   color: #024533 !important;
+
+}
+
+.filter-btn-grp .cancel {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+  font-weight: 600 !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+  height: 100% !important;
+  width: 50% !important;
 
 }
 

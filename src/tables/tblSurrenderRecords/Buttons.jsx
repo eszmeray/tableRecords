@@ -497,13 +497,15 @@ export const Buttons = () => {
               </div>
               <br></br>
 
-              <button className='btn btn-secondary cancel' onClick={handleReset}>CANCEL</button>
-              <button className='btn btn-primary apply' onClick={handleApplyClick}>APPLY</button>
-            </div>
+              <div className="filter-btn-grp d-flex justify-content-between">
+                <button className="btn btn-secondary cancel" onClick={handleReset}>CANCEL</button>
+                <button className="btn btn-primary apply" onClick={handleApplyClick}>APPLY</button>
+              </div>
+          </div>
           </div>
           <button className="btn btn-primary print"><IoIosPrint /> Print Records</button>
         </div>
-      </div>
+        </div>
 
       {successMessage && (
         <div className="success-message">
