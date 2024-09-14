@@ -415,10 +415,7 @@
   
 
   
-  .dropdown-menu .dropdown-item:hover {
-    background-color: #666666;
-    color: white;
-  }
+
   
 .modal-footer .btn-primary{
   font-size: small;
@@ -756,6 +753,11 @@
   outline: none;
 }
 
+.dropdown-menu .dropdown-item:hover {
+  background-color: #666666;
+  color: white;
+}
+
 .dropdown .dropdown-item {
   color: #282828;
 
@@ -795,14 +797,22 @@
 .dropdown-menu {
   overflow-y: auto;
   overflow-x: hidden;
-
+  max-height: 1000%; 
 }
-
 
 .dropdown-menu.show {
-  width: 300%;
+  width: 300%; 
 }
 
+
+
+.filterTitle {
+  color: #024533;
+}
+
+.filterSubtitle {
+  color: #024533;
+}
 
 
 @media (max-width: 1200px) and (max-height: 800px) {
