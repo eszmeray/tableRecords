@@ -175,10 +175,7 @@ export const Buttons = () => {
               <h5 className='filterTitle'>Sort by Category</h5>
 
 
-
               <div className="dropdown-item">
-                <div className="row">
-                  <div className="col-md-6">
                     <h6 className="filterSubtitle">First Name</h6>
                     <hr></hr>
                     <div className="form-check">
@@ -195,10 +192,9 @@ export const Buttons = () => {
                     </div>
                   </div>
 
-                  <div className="col-md-6">
+                  <div className="dropdown-item">
                     <h6 className="filterSubtitle">Last Name</h6>
                     <hr></hr>
-
                     <div className="form-check">
                       <input className="form-check-input" type="radio" name="flexRadioDefaultLastName" id="flexRadioDefault3" />
                       <label className="form-check-label" htmlFor="flexRadioDefault3">
@@ -210,23 +206,16 @@ export const Buttons = () => {
                       <label className="form-check-label" htmlFor="flexRadioDefault4">
                         Descending
                       </label>
-
-                      <br></br>
-
-                      <button className='btn btn-secondary cancel' onClick={handleReset}>CANCEL</button>
-                      <button className='btn btn-primary apply' onClick={handleApplyClick}>APPLY</button>
                     </div>
-                  </div>
-                </div>
+              </div>
+              <div className="filter-btn-grp d-flex justify-content-between">
+                <button className="btn btn-secondary cancel" onClick={handleReset}>CANCEL</button>
+                <button className="btn btn-primary apply" onClick={handleApplyClick}>APPLY</button>
               </div>
             </div>
           </div>
           <button className="btn btn-primary" onClick={toggleModal}><IoIosAdd /> NEW RECORD</button>
-
         </div>
-
-
-
 
         {showModal && (
           <>
