@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import './styles/tblStrandingRecords.css';
-import { IoIosFunnel, IoIosAdd, IoIosPrint } from "react-icons/io";
-import { FaSearch } from 'react-icons/fa';
+import { IoIosAdd, IoIosPrint } from "react-icons/io";
+import { FaSearch, FaSlidersH} from 'react-icons/fa';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 export const Buttons = () => {
   const [filterCriteria, setFilterCriteria] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     fullName: '',
@@ -238,28 +239,37 @@ export const Buttons = () => {
         </div>
         <div className='btn-group'>
           <div className="dropdown">
-            <button className="btn btn-filter dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Filter by type <IoIosFunnel className='funnel-icon' />
-            </button>
-            
-            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('fullName')}>Observer's Full Name</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('date')}>Stranding Date</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('species')}>Species</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('noOfTurtle')}>Turtle Number by Day</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('sex')}>Sex</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('location')}>Location</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('latitude')}>Latitude</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('longitude')}>Longitude</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('condition')}>Condition</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('disposition')}>Final Disposition</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('tagNum')}>Tag Number</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('length')}>Curved Carapace Length</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('width')}>Curved Carapace Width</a>
-              <a className="dropdown-item" href="#" onClick={() => handleFilterChange('remarks')}>Remarks</a>
-
-            </div>
-          </div>
+          <button
+      className="btn btn-filter dropdown-toggle"
+      type="button"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded={dropdownOpen}
+    >
+      <FaSlidersH className='funnel-icon' /> Sorting Options
+    </button>
+    <div className={`dropdown-menu p-3 ${dropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+    <h5 className='filterTitle'>Sort by Category</h5>
+    <div className="dropdown-item">
+                    <h6 className="filterSubtitle">Observer's Full Name</h6>
+                    <hr></hr>
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault1" />
+                      <label className="form-check-label" htmlFor="flexRadioDefault1">
+                        Ascending
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault2" />
+                      <label className="form-check-label" htmlFor="flexRadioDefault2">
+                        Descending
+                      </label>
+                    </div>
+                  </div>
+     
+</div>
+</div>
 
           <button className="btn btn-primary" onClick={toggleModal}><IoIosAdd /> NEW RECORD</button>
           <button className="btn btn-primary print"><IoIosPrint /> Print Records</button>

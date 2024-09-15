@@ -47,6 +47,9 @@ export const Buttons = () => {
 
     });
 
+    const checkboxes = document.querySelectorAll('.dropdown-menu .form-check-input');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+
     console.log('Filters have been reset');
   };
 
@@ -174,16 +177,19 @@ export const Buttons = () => {
             <div className={`dropdown-menu p-3 ${dropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
               <h5 className='filterTitle'>Sort by Category</h5>
 
-
               <div className="dropdown-item">
-                    <h6 className="filterSubtitle">First Name</h6>
-                    <hr></hr>
+                <h6 className="filterSubtitle">First Name</h6>
+                <hr />
+                <div className="row">
+                  <div className="col-6">
                     <div className="form-check">
                       <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault1" />
                       <label className="form-check-label" htmlFor="flexRadioDefault1">
                         Ascending
                       </label>
                     </div>
+                  </div>
+                  <div className="col-6">
                     <div className="form-check">
                       <input className="form-check-input" type="radio" name="flexRadioDefaultFirstName" id="flexRadioDefault2" />
                       <label className="form-check-label" htmlFor="flexRadioDefault2">
@@ -191,23 +197,32 @@ export const Buttons = () => {
                       </label>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div className="dropdown-item">
-                    <h6 className="filterSubtitle">Last Name</h6>
-                    <hr></hr>
+              <div className="dropdown-item">
+                <h6 className="filterSubtitle">Last Name</h6>
+                <hr />
+                <div className="row">
+                  <div className="col-6">
                     <div className="form-check">
                       <input className="form-check-input" type="radio" name="flexRadioDefaultLastName" id="flexRadioDefault3" />
                       <label className="form-check-label" htmlFor="flexRadioDefault3">
                         Ascending
                       </label>
                     </div>
+                  </div>
+                  <div className="col-6">
                     <div className="form-check">
                       <input className="form-check-input" type="radio" name="flexRadioDefaultLastName" id="flexRadioDefault4" />
                       <label className="form-check-label" htmlFor="flexRadioDefault4">
                         Descending
                       </label>
                     </div>
+                  </div>
+                </div>
               </div>
+
               <div className="filter-btn-grp d-flex justify-content-between">
                 <button className="btn btn-secondary cancel" onClick={handleReset}>CANCEL</button>
                 <button className="btn btn-primary apply" onClick={handleApplyClick}>APPLY</button>
