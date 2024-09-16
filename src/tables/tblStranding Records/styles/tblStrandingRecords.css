@@ -573,6 +573,210 @@ outline-offset: 2px;
 }
 
 
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: #666666;
+  color: white;
+}
+
+
+.dropdown .dropdown-item {
+  color: #282828;
+
+}
+
+.dropdown .dropdown-item:active {
+  background-color: transparent;
+  color: inherit;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.dropdown .dropdown-item:hover {
+  background-color: transparent;
+  color: #282828;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.dropdown-item .form-control {
+  font-size: 12px !important;
+
+}
+
+.dropdown-open {
+  pointer-events: none;
+}
+
+.dropdown-open .dropdown-menu,
+.dropdown-open .btn-filter {
+  pointer-events: all;
+}
+
+
+.dropdown-menu {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 1500%; 
+
+}
+
+
+.dropdown-menu.show {
+  width: 300%;
+}
+
+
+.form-check-input {
+  background-color: #fff;
+  border: #024533;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.form-check-input:checked {
+  background-color: #024533 !important;
+  border-color: #024533 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+}
+
+.form-check-input:checked:hover,
+.form-check-input:checked:active,
+.form-check-input:checked:focus {
+  background-color: #024533 !important;
+  border-color: #024533 !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 100, 50, 0.25) !important;
+}
+
+.form-check-input:active {
+  box-shadow: 0 0 0 0.4rem rgba(0, 100, 50, 0.35) !important;
+  border-color: #024533 !important;
+  border-style: none;
+}
+
+.form-check-input:not(:checked):focus {
+  border-color: #2828281e;
+  box-shadow: none;
+}
+
+.form-check-input:checked {
+  color: #024533;
+}
+
+
+.form-check-label {
+  font-size: 12px !important;
+
+}
+
+.btn-group .cancel {
+  margin-left: 5%;
+
+}
+
+.btn-group .cancel,
+.btn-group .apply {
+  font-size: 12px;
+}
+
+.apply {
+  background-color: #024533 !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+
+}
+
+.apply:hover {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+
+}
+
+.filter-btn-grp{
+ 
+  
+  padding: 10px 15px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+}
+
+  
+
+.filter-btn-grp .apply {
+  background-color: #024533 !important;
+  border-color: transparent !important;
+  font-weight: 600 !important;
+  color: white !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+  height: 100% !important;
+  width: 50% !important;
+
+
+}
+
+.filter-btn-grp .cancel {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+  font-weight: 600 !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+  height: 100% !important;
+  width: 50% !important;
+
+}
+
+.cancel {
+  background-color: #E9F3E2 !important;
+  border-color: #024533 !important;
+  color: #024533 !important;
+  font-weight: 600 !important;
+  margin-right: 10px !important;
+  padding: 5px 10px !important;
+
+}
+
+.cancel:hover {
+  background-color: #024533 !important;
+  color: white !important;
+}
+
+
+.apply:active {
+  background-color: #024533 !important;
+  border-color: transparent;
+  font-weight: 600;
+  border-color: #024533 !important;
+  color: white !important;
+
+}
+
+.cancel:active {
+  background-color: #E9F3E2 !important;
+  border-color: transparent;
+  font-weight: 600;
+  color: #024533 !important;
+}
+
+.filterTitle {
+  color: #024533;
+}
+
+.filterSubtitle {
+  color: #024533;
+}
+
 @media (max-width: 1000px) {
 
   .App{
